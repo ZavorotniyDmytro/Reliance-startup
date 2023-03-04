@@ -13,7 +13,6 @@ import { Announcement } from 'src/announcement/dto/announcement/create-announcem
 import { User } from './user.model';
 import { UserService } from './user.service';
 
-//@ApiTags("Usersss API")
 @Controller('users')
 export class UserController {
 	constructor(private readonly userService: UserService) { }
@@ -23,6 +22,7 @@ export class UserController {
 	@ApiResponse({ status: 200, type: [User] })
 	@Get()
 	getAllUsers(): Promise<User[]> {
+		console.log("1")
 		return this.userService.getAll();
 	}
 
