@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AnnouncementService } from 'src/announcement/announcement.service';
 import { User } from './user.model';
 import { InjectModel } from '@nestjs/sequelize';
@@ -15,20 +15,28 @@ export class UserService {
 	}
 
 	public async getByEmail(email: string): Promise<User> {
-		return await this.userRepository.findOne({ where: { email } })
+		const user = await this.userRepository.findOne({ where: { email } })
+		if (user) {
+			return user;
+		}
+		throw new HttpException('User with this email was not found', HttpStatus.NOT_FOUND);
 	}
 
 	async getById(user_id: number): Promise<User> {
-		return await this.userRepository.findOne({ where: { user_id } });
+		const user = await this.userRepository.findOne({ where: { user_id } })
+		if (user) {
+			return user;
+		}
+		throw new HttpException('User with this ID was not found', HttpStatus.NOT_FOUND);
 	}
 
 	async create(data: User): Promise<User> {
-		return this.userRepository.create(data);
+		return await this.userRepository.create(data);
 	}
 
 	async update(id: number, data: Partial<User>): Promise<User> {
-		const user = this.getById(id);
-		return (await user).update(data);
+		const user = await this.getById(id);
+		return await user.update(data);
 	}
 
 	async delete(user_id: number): Promise<void> {
