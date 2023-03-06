@@ -2,6 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AnnouncementService } from 'src/announcement/announcement.service';
 import { User } from './user.model';
 import { InjectModel } from '@nestjs/sequelize';
+import { RegisterDto } from 'src/authentication/dto/register.dto';
 
 @Injectable()
 export class UserService {
@@ -30,7 +31,7 @@ export class UserService {
 		throw new HttpException('User with this ID was not found', HttpStatus.NOT_FOUND);
 	}
 
-	async create(data: User): Promise<User> {
+	async create(data: User | RegisterDto): Promise<User> {
 		return await this.userRepository.create(data);
 	}
 

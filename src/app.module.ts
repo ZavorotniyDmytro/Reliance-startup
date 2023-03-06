@@ -6,6 +6,7 @@ import { ChatsModule } from './chats/chats.module';
 import { UserModule } from './user/user.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './user/user.model';
+import { AuthenticationModule } from './authentication/authentication.module';
 
 @Module({
 	imports: [
@@ -22,6 +23,7 @@ import { User } from './user/user.model';
 			models: [User],
 			autoLoadModels: true,
 		}),
+		AuthenticationModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
