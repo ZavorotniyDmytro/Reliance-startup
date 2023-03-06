@@ -21,3 +21,6 @@ npm i @nestjs/swagger swagger-ui-express
 ----AUTHENTICATIN----
 npm install @types/bcrypt bcrypt
 npm install @nestjs/passport passport @types/passport-local passport-local @types/express
+
+----DOCKER----
+docker-compose build
