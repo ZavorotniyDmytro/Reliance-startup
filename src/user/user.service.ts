@@ -31,7 +31,7 @@ export class UserService {
 		throw new HttpException('User with this ID was not found', HttpStatus.NOT_FOUND);
 	}
 
-	async create(data: User | RegisterDto): Promise<User> {
+	async create(data: RegisterDto): Promise<User> {
 		return await this.userRepository.create(data);
 	}
 
