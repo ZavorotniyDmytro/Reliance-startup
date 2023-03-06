@@ -1,14 +1,28 @@
-FROM node:12.13-alpine
+# FROM node:18-alpine
+
+# WORKDIR /user/src/app
+
+# COPY . .
+
+# RUN npm ci --omit=dev
+
+# RUN npm run build
+
+# USER node
+
+# CMD ["npm", "run", "start:prod"]
+
+
+FROM node:18-alpine
 
 WORKDIR /app
 
 COPY package*.json ./
 
 RUN npm install
-RUN npm rebuild bcrypt 
 
 COPY . .
 
 COPY ./dist ./dist
 
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start:prod"]

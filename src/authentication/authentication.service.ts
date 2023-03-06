@@ -1,7 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { RegisterDto } from './dto/register.dto';
-import * as bcrypt from 'bcrypt'
+
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class AuthenticationService {
@@ -34,7 +35,7 @@ export class AuthenticationService {
 			user.password = undefined;
 			return user
 		} catch (error) {
-		throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
+			throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
 		}
 
 	}
