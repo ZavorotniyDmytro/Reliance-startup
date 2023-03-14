@@ -10,11 +10,11 @@ interface UserCreationAttrs {
 export class User extends Model<User, UserCreationAttrs>{
 
 	@ApiProperty({ example: 1, description: "ID" })
-	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true, allowNull: true })
+	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	public user_id: number;
 
 	@ApiProperty({ example: 'John', description: "Name" })
-	@Column({ type: DataType.STRING, allowNull: true })
+	@Column({ type: DataType.STRING})
 	public name: string;
 
 	@ApiProperty({ example: 25, description: "Age" })

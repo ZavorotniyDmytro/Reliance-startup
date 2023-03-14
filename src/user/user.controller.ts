@@ -58,9 +58,6 @@ export class UserController {
 		this.userService.delete(id);
 	}
 
-
-
-
 	@ApiTags("User API")
 	@ApiOperation({ summary: "Get all announcement by user ID" })
 	@ApiResponse({ status: 200, type: Announcement })
