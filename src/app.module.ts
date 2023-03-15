@@ -8,6 +8,7 @@ import { UserModule } from './user/user.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import * as Joi from '@hapi/joi';
 import { DatabaseModule } from './database/database.module';
+import { ResumeModule } from './resume/resume.module';
 
 @Module({
 	imports: [
@@ -25,7 +26,8 @@ import { DatabaseModule } from './database/database.module';
 				POSTGRES_PASSWORD: Joi.string().required(),
 				POSTGRES_PORT: Joi.number().default(5432),
 			})
-		})
+		}),
+		ResumeModule
 	],
 	controllers: [AppController],
 	providers: [AppService],

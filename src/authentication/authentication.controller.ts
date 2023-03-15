@@ -6,7 +6,6 @@ import JwtAuthenticationGuard from './jwt-authentication.guard';
 import { LocalAuthenticationGuard } from './localAuthentication.guard';
 import RequestWithUser from './requestWithUser.interface';
 
-
 @Controller('authentication')
 export class AuthenticationController {
 	constructor(
