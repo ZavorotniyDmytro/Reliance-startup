@@ -18,18 +18,18 @@ export class Resume extends Model<Resume, ResumeCreationAttrs>{
     public user_id: number;
     
     @ApiProperty({example: "IvanVanilla", description: "Name of the user"})
-    @Column({type: DataType.STRING })
+    @Column({type: DataType.STRING, allowNull: false })
     public name: string;
 
     @ApiProperty({example: "ivanvanilla@example.com", description: "The email of the user"})
-    @Column({type: DataType.STRING })
+    @Column({type: DataType.STRING, allowNull: false })
     public email: string;
 
     @ApiProperty({example: "+380999999999", description: "The phone number of the user"})
-    @Column({type: DataType.STRING, allowNull: true })
+    @Column({type: DataType.STRING, allowNull: false })
     public phone: string;
 
     @ApiProperty({example: "1 year of programming in Nodejs.", description: "Experiance of the user"})
-    @Column({type: DataType.STRING })
+    @Column({type: DataType.STRING, allowNull: false })
     public expirience: string;
 }

@@ -14,19 +14,19 @@ export class User extends Model<User, UserCreationAttrs>{
 	public user_id: number;
 
 	@ApiProperty({ example: 'John', description: "Name" })
-	@Column({ type: DataType.STRING})
+	@Column({ type: DataType.STRING, allowNull: false})
 	public name: string;
 
 	@ApiProperty({ example: 25, description: "Age" })
-	@Column({ type: DataType.INTEGER })
+	@Column({ type: DataType.INTEGER, allowNull: false })
 	public age: number;
 
 	@ApiProperty({ example: 'example@mail.ua', description: "Email" })
-	@Column({ type: DataType.STRING, unique: true, allowNull: true })
+	@Column({ type: DataType.STRING, unique: true, allowNull: false })
 	public email: string;
 
 	@ApiProperty({ example: '12345678', description: "Password" })
-	@Column({ type: DataType.STRING, allowNull: true })
+	@Column({ type: DataType.STRING, allowNull: false })
 	public password: string;
 
 	//@Column({ type: [Announcement], defaultValue: })
