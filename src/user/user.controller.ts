@@ -10,12 +10,18 @@ import {
 import { ApiOperation } from '@nestjs/swagger';
 import { ApiResponse, ApiTags } from '@nestjs/swagger/dist';
 import { Announcement } from 'src/announcement/dto/announcement/create-announcement.dto';
+import { ResumeDto } from 'src/resume/dto/resume-dto';
+import { Resume } from 'src/resume/resume.model';
+import { ResumeService } from 'src/resume/resume.service';
 import { User } from './user.model';
 import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {
-	constructor(private readonly userService: UserService) { }
+	constructor(
+		private readonly userService: UserService, 
+		private readonly resumeService: ResumeService
+		) { }
 
 	@ApiTags("User API")
 	@ApiOperation({ summary: "Get all users" })
@@ -63,8 +69,41 @@ export class UserController {
 	@ApiResponse({ status: 200, type: Announcement })
 	@Get(':user_id/announcements')
 	getAllAnnouncement(@Param('user_id') user_id: string) {
-		console.log(user_id)
 		return this.userService.getAllAnnouncement(user_id);
+	}
+
+	@ApiTags("Resume API")
+	@ApiOperation({ summary: "Create resume by user ID" })
+	@ApiResponse({ status: 200, type: Resume })
+	@Post(':user_id/resume')
+	async createResume(@Param('user_id') user_id: number, @Body() data: ResumeDto) {
+		const user_data = await this.userService.getDataForResume(user_id);
+		const resume_data = ({...data, user_id, ...user_data});
+		return this.resumeService.create(resume_data);
+	}
+
+	@ApiTags("Resume API")
+	@ApiOperation({ summary: "Get resume" })
+	@ApiResponse({ status: 200, type: [Resume] })
+	@Get(':user_id/resume/:id')
+	getResumeById(@Param('id') id: number): Promise<Resume> {
+        return this.resumeService.getById(id);
+	}
+
+	@ApiTags("Resume API")
+	@ApiOperation({ summary: "Update resume by Id" })
+	@ApiResponse({ status: 203, type: ResumeDto })
+	@Put(':user_id/resume/:id')
+	async updateResume(@Param('id') id: number, @Body() data: Partial<Resume>): Promise<Resume> {
+		return this.resumeService.update(id, data);
+	}
+
+	@ApiTags("Resume API")
+	@ApiOperation({ summary: "Delete resume by Id" })
+	@ApiResponse({ status: 204, type: Resume })
+	@Delete(':user_id/resume/:id')
+	async deleteResume(@Param('id') id: number): Promise<void> {
+		this.resumeService.delete(id);
 	}
 
 	// get :user_id/chats

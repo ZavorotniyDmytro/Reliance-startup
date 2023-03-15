@@ -3,6 +3,9 @@ import { AnnouncementService } from 'src/announcement/announcement.service';
 import { User } from './user.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { RegisterDto } from 'src/authentication/dto/register.dto';
+import { CreateUserDto } from './dto/user/create-user.dto';
+import { UpdateUserDto } from './dto/user/update-user.dto';
+import { ResumeUserDto } from './dto/resume/resume-user.dto';
 
 @Injectable()
 export class UserService {
@@ -31,11 +34,11 @@ export class UserService {
 		throw new HttpException('User with this ID was not found', HttpStatus.NOT_FOUND);
 	}
 
-	async create(data: RegisterDto): Promise<User> {
+	async create(data: CreateUserDto): Promise<User> {
 		return await this.userRepository.create(data);
 	}
 
-	async update(id: number, data: Partial<User>): Promise<User> {
+	async update(id: number, data: UpdateUserDto): Promise<User> {
 		const user = await this.getById(id);
 		return await user.update(data);
 	}
@@ -47,5 +50,11 @@ export class UserService {
 
 	public getAllAnnouncement(user_id: string) {
 		return this.announcementService.getByOwnerId_MOCKS(user_id);
+	}
+
+	async getDataForResume(user_id: number): Promise<ResumeUserDto> {
+		let user = (await this.getById(user_id))["dataValues"];
+		const user_data = {email: user.email, name: user.name};
+		return user_data;
 	}
 }
