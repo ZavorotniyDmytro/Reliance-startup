@@ -8,10 +8,6 @@ import { ChatMocks } from "src/mocks/chat.mock";
 
 export class CreateUserDto {
 
-	@ApiProperty({ example: 1, description: "ID" })
-	//@IsNumber()
-	public user_id: number;
-
 	@ApiProperty({ example: 'John', description: "Name" })
 	//@IsString()
 	//@IsNotEmpty()
@@ -31,10 +27,10 @@ export class CreateUserDto {
 	//@IsNotEmpty()
 	public password: string;
 
-	@ApiProperty({ example: announcementMOCK, description: "Announcement list" })
-	public announcement_list: Announcement[] = [];
+	// @ApiProperty({ example: announcementMOCK, description: "Announcement list" })
+	// public announcement_list: Announcement[] = [];
 
-	@ApiProperty({ example: ChatMocks.chats, description: "Announcement list" })
-	public chat_list: CreateChatDto[] = [];
+	// @ApiProperty({ example: ChatMocks.chats, description: "Announcement list" })
+	// public chat_list: CreateChatDto[] = [];
 	// 
 }

@@ -4,11 +4,16 @@ import { UserController } from './user.controller';
 import { AnnouncementModule } from 'src/announcement/announcement.module';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './user.model';
+import { ResumeModule } from 'src/resume/resume.module';
 
 @Module({
-	providers: [UserService],
+	imports: [
+		AnnouncementModule,
+		ResumeModule,
+		SequelizeModule.forFeature([User])],
 	controllers: [UserController],
-	imports: [AnnouncementModule,
-		SequelizeModule.forFeature([User])]
+	providers: [UserService],
+	exports: [UserService]
+
 })
 export class UserModule { }
