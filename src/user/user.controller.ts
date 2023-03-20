@@ -19,9 +19,9 @@ import { UserService } from './user.service';
 @Controller('users')
 export class UserController {
 	constructor(
-		private readonly userService: UserService, 
+		private readonly userService: UserService,
 		private readonly resumeService: ResumeService
-		) { }
+	) { }
 
 	@ApiTags("User API")
 	@ApiOperation({ summary: "Get all users" })
@@ -50,7 +50,7 @@ export class UserController {
 
 	@ApiTags("User API")
 	@ApiOperation({ summary: "Update user by ID" })
-	@ApiResponse({ status: 200, type: User })
+	@ApiResponse({ status: 200, type: Promise<User> })
 	@Put(':id')
 	async update(@Param('id') id: number, @Body() data: Partial<User>): Promise<User> {
 		return this.userService.update(id, data);
@@ -58,7 +58,7 @@ export class UserController {
 
 	@ApiTags("User API")
 	@ApiOperation({ summary: "Delete user by ID" })
-	@ApiResponse({ status: 200, type: User })
+	@ApiResponse({ status: 200, type: Promise<void> })
 	@Delete(':id')
 	async delete(@Param('id') id: number): Promise<void> {
 		this.userService.delete(id);
@@ -78,7 +78,7 @@ export class UserController {
 	@Post(':user_id/resume')
 	async createResume(@Param('user_id') user_id: number, @Body() data: ResumeDto) {
 		const user_data = await this.userService.getDataForResume(user_id);
-		const resume_data = ({...data, user_id, ...user_data});
+		const resume_data = ({ ...data, user_id, ...user_data });
 		return this.resumeService.create(resume_data);
 	}
 
@@ -87,7 +87,7 @@ export class UserController {
 	@ApiResponse({ status: 200, type: [Resume] })
 	@Get(':user_id/resume/:id')
 	getResumeById(@Param('id') id: number): Promise<Resume> {
-        return this.resumeService.getById(id);
+		return this.resumeService.getById(id);
 	}
 
 	@ApiTags("Resume API")

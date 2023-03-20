@@ -2,7 +2,6 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { AnnouncementService } from 'src/announcement/announcement.service';
 import { User } from './user.model';
 import { InjectModel } from '@nestjs/sequelize';
-import { RegisterDto } from 'src/authentication/dto/register.dto';
 import { CreateUserDto } from './dto/user/create-user.dto';
 import { UpdateUserDto } from './dto/user/update-user.dto';
 import { ResumeUserDto } from './dto/resume/resume-user.dto';

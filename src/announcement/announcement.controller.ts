@@ -1,10 +1,11 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { AnnouncementService } from './announcement.service';
 import { Announcement } from './dto/announcement/create-announcement.dto';
 import { UpdateAnnouncementDto } from './dto/announcement/update-announcement.dto';
 
-
+@ApiTags("Announsement API")
 @Controller('announcements')
 export class AnnouncementController {
 
