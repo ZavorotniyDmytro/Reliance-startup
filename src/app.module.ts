@@ -12,6 +12,7 @@ import { AnnouncementModule } from './announcement/announcement.module';
 import { DatabaseModule } from './database/database.module';
 import { ResumeModule } from './resume/resume.module';
 import { RolesModule } from './roles/roles.module';
+import { ContractModule } from './contract/contract.module';
 
 @Module({
 	imports: [
@@ -31,7 +32,8 @@ import { RolesModule } from './roles/roles.module';
 		AuthenticationModule,
 		DatabaseModule,
 		ResumeModule,
-		RolesModule
+		RolesModule,
+		ContractModule
 	],
 	controllers: [AppController],
 	providers: [AppService],
