@@ -1,7 +1,7 @@
 export enum ContractStatus {
-	Active = 'active',
-	Complete = 'complete',
-	Canceled = 'canceled',
-	Frozen = 'frozen'
+	ACTIVE = 'active',
+	COMPLETE = 'complete',
+	CANCELED = 'canceled',
+	FROZEN = 'frozen'
 }
 
