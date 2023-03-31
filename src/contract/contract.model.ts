@@ -10,7 +10,7 @@ interface ContractCreationAttrs {
 	 status: ContractStatus;
 }
 
-@Table({ tableName: 'Contracts' })
+@Table({ tableName: 'contracts' })
 export class Contract extends Model<Contract, ContractCreationAttrs>{
 
 	@ApiProperty({example: 1, description: "Contact ID"})
