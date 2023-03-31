@@ -12,6 +12,8 @@ import { AnnouncementModule } from './announcement/announcement.module';
 import { DatabaseModule } from './database/database.module';
 import { ResumeModule } from './resume/resume.module';
 import { RolesModule } from './roles/roles.module';
+import { ContractModule } from './contract/contract.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
 	imports: [
@@ -23,6 +25,9 @@ import { RolesModule } from './roles/roles.module';
 				POSTGRES_DB: Joi.string().required(),
 				POSTGRES_PASSWORD: Joi.string().required(),
 				POSTGRES_PORT: Joi.number().default(5432),
+				EMAIL_SERVICE: Joi.string().required(),
+        		EMAIL_USER: Joi.string().required(),
+        		EMAIL_PASSWORD: Joi.string().required(),
 			})
 		}),
 		UserModule,
@@ -31,7 +36,9 @@ import { RolesModule } from './roles/roles.module';
 		AuthenticationModule,
 		DatabaseModule,
 		ResumeModule,
-		RolesModule
+		RolesModule,
+		ContractModule,
+		ReviewModule
 	],
 	controllers: [AppController],
 	providers: [AppService],

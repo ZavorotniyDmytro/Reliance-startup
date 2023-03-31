@@ -11,9 +11,9 @@ import { ApiOperation } from '@nestjs/swagger';
 import { ApiResponse, ApiTags } from '@nestjs/swagger/dist';
 import { Announcement } from 'src/announcement/dto/announcement/create-announcement.dto';
 import { ResumeDto } from 'src/resume/dto/resume-dto';
-import { Resume } from 'src/resume/resume.model';
+import { Resume } from 'src/models/resume.model';
 import { ResumeService } from 'src/resume/resume.service';
-import { User } from './user.model';
+import { User } from '../models/user.model';
 import { UserService } from './user.service';
 
 @Controller('users')

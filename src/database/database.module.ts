@@ -2,9 +2,9 @@ import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { SequelizeModule } from '@nestjs/sequelize';
 
-import { Resume } from "../resume/resume.model";
-import { Role } from "../roles/roles.model";
-import { User } from '../user/user.model';
+import { Resume } from "../models/resume.model";
+import { Role } from "../models/roles.model";
+import { User } from '../models/user.model';
 
 @Module({
 	imports: [SequelizeModule.forRootAsync({
