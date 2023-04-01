@@ -19,7 +19,7 @@ import { User } from '../models/user.model';
 			password: configService.get('POSTGRES_PASSWORD'),
 			database: configService.get('POSTGRES_DB'),
 			models: [User, Role, Resume, Contract], // 
-			autoLoadModels: true,
+			// autoLoadModels: true,
 		})
 	}),]
 })
