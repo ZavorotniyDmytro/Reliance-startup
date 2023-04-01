@@ -22,15 +22,15 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
    public discription: string;
     
    @ApiProperty({example: 400, description: "Contract price"})
-   @Column({type: DataType.NUMBER })
+   @Column({type: DataType.INTEGER })
    public price: number;
 
    @ApiProperty({example: 15, description: "Employer user ID"})
-   @Column({type: DataType.NUMBER })
+   @Column({type: DataType.INTEGER })
    public employer_id: number;
 
 	@ApiProperty({example: 11, description: "Worker user ID"})
-   @Column({type: DataType.NUMBER })
+   @Column({type: DataType.INTEGER })
    public worker_id: number;
 
    @ApiProperty({example: Date.now(), description: "Contract validity period"})
