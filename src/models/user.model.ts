@@ -2,6 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { HasOne, Column, DataType, Model, Table, HasMany } from "sequelize-typescript";
 import { Message } from "./message.model";
 import { Resume } from "./resume.model";
+import { Review } from "./review.model";
 
 interface UserCreationAttrs {
 	email: string
@@ -38,18 +39,18 @@ export class User
 	public password: string;
 
 
-	@HasOne(()=>Resume, 'user_id')
-	resume: Resume //(o t o)
+	@HasOne(()=>Resume)
+	resumes: Resume
 
 	// announcements [] (o t m)
 
 	// chats [] (m t m)
 
-	// reviews [] (o t m)
+	@HasMany(()=> Review)
+	reviews:Review[]
 
 	@HasMany(()=>Message)
 	messages: Message[]
-	// messages [] ( o t m)
 
 	// roles [] (m t m)
 }

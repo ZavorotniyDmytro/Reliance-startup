@@ -40,7 +40,7 @@ export class RolesController {
 	}
 
 	@ApiOperation({ summary: "Create role" })
-	@ApiResponse({ status: 200, type: Promise<void> })       // Promise<void> | undefined | void (error)
+	@ApiResponse({ status: 200, type: Promise<void> })
 	@Delete(':id')
 	delete(@Param('id') id: number) {
 		this.delete(id)

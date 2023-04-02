@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
 import { ContractStatus } from "../contract/contrartStatus.enum";
+import { Review } from "./review.model";
 
 interface ContractCreationAttrs {
     price:number;
@@ -41,6 +42,8 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
    @Column({type: DataType.STRING(9), allowNull: false})
    public status: ContractStatus;
 
+	@HasOne(()=>Review)
+	review: Review
 	// materials_count[]
 }
 
