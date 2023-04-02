@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsTo, HasOne, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { HasOne, Column, DataType, Model, Table, HasMany } from "sequelize-typescript";
+import { Message } from "./message.model";
 import { Resume } from "./resume.model";
 
 interface UserCreationAttrs {
@@ -46,6 +47,8 @@ export class User
 
 	// reviews [] (o t m)
 
+	@HasMany(()=>Message)
+	messages: Message[]
 	// messages [] ( o t m)
 
 	// roles [] (m t m)

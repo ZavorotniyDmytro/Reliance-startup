@@ -38,7 +38,9 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
    public validity_period: Date;
 
    @ApiProperty({example: "active", description: "Contract status"})
-   @Column({type: DataType.STRING, allowNull: false})
+   @Column({type: DataType.STRING(9), allowNull: false})
    public status: ContractStatus;
+
+	// materials_count[]
 }
 
