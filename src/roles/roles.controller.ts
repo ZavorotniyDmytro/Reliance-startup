@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Put, HttpCode, HttpS
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
-import { Role } from '../models/roles.model';
+import { Role } from '../models/role.model';
 import { RoleService } from './roles.service';
 
 @ApiTags('Role API')
@@ -40,7 +40,7 @@ export class RolesController {
 	}
 
 	@ApiOperation({ summary: "Create role" })
-	@ApiResponse({ status: 200, type: Promise<void> })       // Promise<void> | undefined | void (error)
+	@ApiResponse({ status: 200, type: Promise<void> })
 	@Delete(':id')
 	delete(@Param('id') id: number) {
 		this.delete(id)

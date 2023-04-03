@@ -28,7 +28,6 @@ export class UserController {
 	@ApiResponse({ status: 200, type: [User] })
 	@Get()
 	getAllUsers(): Promise<User[]> {
-		console.log("1")
 		return this.userService.getAll();
 	}
 

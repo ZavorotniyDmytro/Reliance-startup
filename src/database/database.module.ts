@@ -1,9 +1,12 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Review } from "src/models/review.model";
 
+import { Contract } from "../models/contract.model";
+import { Message } from "../models/message.model";
 import { Resume } from "../models/resume.model";
-import { Role } from "../models/roles.model";
+import { Role } from "../models/role.model";
 import { User } from '../models/user.model';
 
 @Module({
@@ -17,7 +20,7 @@ import { User } from '../models/user.model';
 			username: configService.get('POSTGRES_USER'),
 			password: configService.get('POSTGRES_PASSWORD'),
 			database: configService.get('POSTGRES_DB'),
-			models: [User, Role, Resume],
+			models: [User, Role, Resume, Contract, Message, Review], // 
 			autoLoadModels: true,
 		})
 	}),]

@@ -2,7 +2,7 @@ import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, Model, Table } from "sequelize-typescript";
 
 interface RolesCreationAttrs {
-	value: string
+	name: string
 	description: string
 }
 
@@ -14,10 +14,10 @@ export class Role extends Model<Role, RolesCreationAttrs>{
 	public id: number;
 
 	@ApiProperty({ example: 'ADMIN', description: "Role name" })
-	@Column({ type: DataType.STRING, unique: true, allowNull: false })
-	public value: string;
+	@Column({ type: DataType.STRING(20), unique: true, allowNull: false })
+	public name: string;
 
 	@ApiProperty({ example: "It`s admin role", description: "Role discription" })
-	@Column({ type: DataType.STRING, allowNull: false })
+	@Column({ type: DataType.STRING(200), allowNull: false })
 	public description: string;
 }
