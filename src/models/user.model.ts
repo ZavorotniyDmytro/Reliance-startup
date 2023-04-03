@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { HasOne, Column, DataType, Model, Table, HasMany } from "sequelize-typescript";
+import { Contract } from "./contract.model";
 import { Message } from "./message.model";
 import { Resume } from "./resume.model";
 import { Review } from "./review.model";
@@ -52,5 +53,8 @@ export class User
 	@HasMany(()=>Message)
 	messages: Message[]
 
+	@HasMany(()=>Contract)
+	contracts: Contract[]
+	
 	// roles [] (m t m)
 }

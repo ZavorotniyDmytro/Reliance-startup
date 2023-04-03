@@ -1,7 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
+import { BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
 import { ContractStatus } from "../contract/contrartStatus.enum";
 import { Review } from "./review.model";
+import { User } from "./user.model";
 
 interface ContractCreationAttrs {
     price:number;
@@ -27,12 +28,20 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
    public price: number;
 
    @ApiProperty({example: 15, description: "Employer user ID"})
+	@ForeignKey(()=>User)
    @Column({type: DataType.INTEGER })
    public employer_id: number;
 
+	@BelongsTo(() => User, 'employer_id')
+	employer: User
+
 	@ApiProperty({example: 11, description: "Worker user ID"})
+	@ForeignKey(()=>User)
    @Column({type: DataType.INTEGER })
    public worker_id: number;
+
+	@BelongsTo(() => User, 'worker_id')
+	worker: User
 
    @ApiProperty({example: Date.now(), description: "Contract validity period"})
    @Column({type: DataType.DATE})
@@ -44,6 +53,7 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
 
 	@HasOne(()=>Review)
 	review: Review
+
 	// materials_count[]
 }
 
