@@ -54,6 +54,6 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
 	@HasOne(()=>Review)
 	review: Review
 
-	// materials_count[]
+	// materials[]
 }
 

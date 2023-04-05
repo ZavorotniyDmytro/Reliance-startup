@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { HasOne, Column, DataType, Model, Table, HasMany } from "sequelize-typescript";
+import { Announcement } from "./announcement.model";
 import { Contract } from "./contract.model";
 import { Message } from "./message.model";
 import { Resume } from "./resume.model";
@@ -14,7 +15,7 @@ interface UserCreationAttrs {
 export class User 
 						extends Model<User, UserCreationAttrs> 
 						implements UserCreationAttrs{
-
+							
 	@ApiProperty({ example: 1, description: "ID" })
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	public user_id: number;
@@ -43,9 +44,11 @@ export class User
 	@HasOne(()=>Resume)
 	resumes: Resume
 
-	// announcements [] (o t m)
+	@HasMany(()=>Announcement)
+	announcements: Announcement[]
 
-	// chats [] (m t m)
+	// @HasMany(/*сміжна модель*/)
+	// chats: Chat[] //(m t m)
 
 	@HasMany(()=> Review)
 	reviews:Review[]
