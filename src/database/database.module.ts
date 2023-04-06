@@ -38,7 +38,8 @@ import { User } from '../models/user.model';
 				UserRole, 
 				User
 			],
-			//autoLoadModels: true,
+			autoLoadModels: true,
+			synchronize: true,
 		})
 	}),]
 })
