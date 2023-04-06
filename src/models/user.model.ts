@@ -1,10 +1,12 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { HasOne, Column, DataType, Model, Table, HasMany } from "sequelize-typescript";
+import { HasOne, Column, DataType, Model, Table, HasMany, BelongsToMany } from "sequelize-typescript";
 import { Announcement } from "./announcement.model";
 import { Contract } from "./contract.model";
 import { Message } from "./message.model";
 import { Resume } from "./resume.model";
 import { Review } from "./review.model";
+import { Role } from "./role.model";
+import { UserRole } from "./user-role.model";
 
 interface UserCreationAttrs {
 	email: string
@@ -59,5 +61,6 @@ export class User
 	@HasMany(()=>Contract)
 	contracts: Contract[]
 	
-	// roles [] (m t m)
+	@BelongsToMany(()=>Role, ()=>UserRole)
+	roles: Role[]
 }

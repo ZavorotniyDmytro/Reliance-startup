@@ -4,12 +4,10 @@ import { Announcement } from "./announcement.model";
 
 import { User } from "./user.model";
 
-interface FollowerCreationAttrs {
-	
-}
+
 
 @Table({ tableName: 'followers' })
-export class Follower extends Model<Follower, FollowerCreationAttrs> {
+export class Follower extends Model<Follower> {
 
 	@ApiProperty({example: 14, description: "Follower ID"})
 	@Column({type: DataType.INTEGER, primaryKey: true, unique: true, autoIncrement: true})

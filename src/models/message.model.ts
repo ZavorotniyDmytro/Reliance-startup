@@ -2,6 +2,7 @@
 
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript";
+import { Chat } from "./chat.model";
 import { User } from "./user.model";
 
 interface MessageCreationAttrs {
@@ -23,13 +24,13 @@ export class Message extends Model<Message, MessageCreationAttrs>{
 	@BelongsTo(() => User, 'sender_id')
 	sender: User;
 
-	// @ApiProperty({example: 1, description: "ChatID"})
-	// @ForeignKey(() => Chat)
-	// @Column({type: DataType.INTEGER, allowNull: false})
-	// chat_id: number;
+	@ApiProperty({example: 1, description: "ChatID"})
+	@ForeignKey(() => Chat)
+	@Column({type: DataType.INTEGER, allowNull: false})
+	chat_id: number;
 
-	// @BelongsTo(() => User, 'chat_id')
-	// chat: Chat;
+	@BelongsTo(() => User, 'chat_id')
+	chat: Chat;
 
 
 	// skills [] ( o t m)

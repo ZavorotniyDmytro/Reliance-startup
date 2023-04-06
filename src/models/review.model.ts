@@ -33,8 +33,8 @@ export class Review extends Model<Review, ReviewCreationAttrs>{
 	@BelongsTo(()=>Contract, 'contract_id')
 	public contract: Contract
 
-	@ApiProperty({example: 47, description: "Review rating 1 to 50"})
-   @Column({type: DataType.INTEGER, allowNull: true })
+	@ApiProperty({example: 4.7, description: "Review rating 0.0 to 5.0"})
+   @Column({type: DataType.DECIMAL(3, 1), allowNull: true })
    public rating: number;
 
 	@ApiProperty({example: "Good work", description: "Review text"})

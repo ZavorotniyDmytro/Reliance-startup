@@ -11,7 +11,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
 import { AnnouncementModule } from './announcement/announcement.module';
 import { DatabaseModule } from './database/database.module';
 import { ResumeModule } from './resume/resume.module';
-import { RolesModule } from './roles/roles.module';
+import { RolesModule } from './roles/role.module';
 import { ContractModule } from './contract/contract.module';
 import { ReviewModule } from './review/review.module';
 
