@@ -2,7 +2,7 @@ import { Column, DataType, ForeignKey, Model, Table } from "sequelize-typescript
 import { Chat } from "./chat.model";
 import { User } from "./user.model";
 
-@Table({ tableName: 'chat_roles', createdAt: false, updatedAt: false})
+@Table({ tableName: 'chat_users', createdAt: false, updatedAt: false})
 export class UserChat extends Model<UserChat>{
 
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
@@ -14,6 +14,6 @@ export class UserChat extends Model<UserChat>{
 
 	@ForeignKey(()=>Chat)
 	@Column({ type: DataType.INTEGER })
-	public role_id: number;
+	public chat_id: number;
 
 }
