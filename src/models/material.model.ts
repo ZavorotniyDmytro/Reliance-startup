@@ -1,6 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { BelongsToMany, Column, DataType, Model, Table } from "sequelize-typescript";
 import { Sequelize } from "sequelize";
+import { Contract } from "./contract.model";
+import { ContractMaterial } from "./contract-material.model";
 
 interface MaterialCreationAttrs {
 	price: number
@@ -21,5 +23,6 @@ export class Material extends Model<Material, MaterialCreationAttrs> {
    @Column({type: DataType.STRING, allowNull: false})
    public discription: string;
 
-	// where_used: Contract[] ( m t m )
+	@BelongsToMany(()=>Contract, ()=>ContractMaterial)
+	where_used: Contract[]
 }

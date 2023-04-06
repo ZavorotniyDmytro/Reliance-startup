@@ -1,6 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
+import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
 import { ContractStatus } from "../contract/contrartStatus.enum";
+import { ContractMaterial } from "./contract-material.model";
+import { Material } from "./material.model";
 import { Review } from "./review.model";
 import { User } from "./user.model";
 
@@ -54,6 +56,7 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
 	@HasOne(()=>Review)
 	review: Review
 
-	// materials[]
+	@BelongsToMany(()=>Material, ()=> ContractMaterial)
+	materials: Material[]
 }
 
