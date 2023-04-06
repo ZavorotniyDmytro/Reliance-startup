@@ -26,23 +26,23 @@ async function bootstrap() {
 
 	const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('postgres://user:password@localhost:5432/mydb');
+//const sequelize = new Sequelize('postgres://user:password@localhost:5432/mydb');
 
-(async () => {
-  try {
-    await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+// (async () => {
+//   try {
+//     await sequelize.authenticate();
+//     console.log('Connection has been established successfully.');
 
-    await sequelize.query('CREATE DATABASE IF NOT EXISTS mydb;');
-    console.log('Database has been created.');
+//     await sequelize.query('CREATE DATABASE IF NOT EXISTS mydb;');
+//     console.log('Database has been created.');
 
-    // Define your models and synchronize with the database
-    // ...
+//     // Define your models and synchronize with the database
+//     // ...
 
-  } catch (error) {
-    console.error('Unable to connect to the database:', error);
-  }
-})();
+//   } catch (error) {
+//     console.error('Unable to connect to the database:', error);
+//   }
+// })();
 
 	const PORT = configService.get('PORT') ?? 3000;
 	await app.listen(PORT, () => console.log(`Server start in PORT = ${PORT}`));

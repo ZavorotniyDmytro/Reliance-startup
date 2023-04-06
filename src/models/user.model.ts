@@ -1,11 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { HasOne, Column, DataType, Model, Table, HasMany, BelongsToMany } from "sequelize-typescript";
 import { Announcement } from "./announcement.model";
+import { Chat } from "./chat.model";
 import { Contract } from "./contract.model";
 import { Message } from "./message.model";
 import { Resume } from "./resume.model";
 import { Review } from "./review.model";
 import { Role } from "./role.model";
+import { UserChat } from "./user-chat.model";
 import { UserRole } from "./user-role.model";
 
 interface UserCreationAttrs {
@@ -49,8 +51,8 @@ export class User
 	@HasMany(()=>Announcement)
 	announcements: Announcement[]
 
-	// @HasMany(/*сміжна модель*/)
-	// chats: Chat[] //(m t m)
+	@BelongsToMany(()=>Chat, ()=>UserChat)
+	chats: Chat[]
 
 	@HasMany(()=> Review)
 	reviews:Review[]
