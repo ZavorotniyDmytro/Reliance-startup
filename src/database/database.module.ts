@@ -3,9 +3,11 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { SequelizeModule } from '@nestjs/sequelize';
 import { Announcement } from "src/models/announcement.model";
 import { Chat } from "src/models/chat.model";
+import { ContractMaterial } from "src/models/contract-material.model";
 import { Follower } from "src/models/follower.model";
 import { Material } from "src/models/material.model";
 import { Review } from "src/models/review.model";
+import { UserChat } from "src/models/user-chat.model";
 import { UserRole } from "src/models/user-role.model";
 
 import { Contract } from "../models/contract.model";
@@ -28,14 +30,16 @@ import { User } from '../models/user.model';
 			models: [
 				Announcement, 
 				Chat, 
-				Contract, 
+				Contract,
+				ContractMaterial,
 				Follower, 
 				Material, 
 				Message, 
 				Resume, 
 				Review, 
 				Role, 
-				UserRole, 
+				UserRole,
+				UserChat, 
 				User
 			],
 			autoLoadModels: true,

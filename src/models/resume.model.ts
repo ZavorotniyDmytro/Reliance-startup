@@ -3,8 +3,8 @@ import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from "sequelize
 import { User } from "./user.model";
 
 interface ResumeCreationAttrs {
-    phone: string;
-    experience: string;
+		phone: string;
+		experience: string;
 }
 
 @Table({ tableName: 'resumes' })
@@ -37,7 +37,5 @@ export class Resume extends Model<Resume, ResumeCreationAttrs>{
    @ApiProperty({example: "1 year of programming in Nodejs.", description: "Experiance of the user"})
    @Column({type: DataType.STRING })
    public experience: string;
-
-	// skills [] ( o t m)
 	
 }
