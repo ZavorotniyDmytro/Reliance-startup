@@ -23,7 +23,7 @@ export class User
 	@ApiProperty({ example: 1, description: "ID" })
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	public user_id: number;
-
+	
 	@ApiProperty({ example: 'John', description: "Name" })
 	@Column({ type: DataType.STRING(20), allowNull: false})
 	public name: string;

@@ -19,6 +19,9 @@ export class Resume extends Model<Resume, ResumeCreationAttrs>{
    @Column({type: DataType.INTEGER, unique: true})
    public user_id: number;
     
+	@BelongsTo(()=>User)
+	user: User
+
 	@ForeignKey(()=>User)
    @ApiProperty({example: "IvanVanilla", description: "Name of the user"})
    @Column({type: DataType.STRING, allowNull: false })

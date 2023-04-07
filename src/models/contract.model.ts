@@ -36,7 +36,7 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
 
 	@BelongsTo(() => User, 'employer_id')
 	employer: User
-
+	
 	@ApiProperty({example: 11, description: "Worker user ID"})
 	@ForeignKey(()=>User)
    @Column({type: DataType.INTEGER })

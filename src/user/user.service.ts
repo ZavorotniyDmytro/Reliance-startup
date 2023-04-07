@@ -5,16 +5,18 @@ import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './dto/user/create-user.dto';
 import { UpdateUserDto } from './dto/user/update-user.dto';
 import { ResumeUserDto } from './dto/resume/resume-user.dto';
+import { RoleService } from 'src/roles/role.service';
 
 @Injectable()
 export class UserService {
 	constructor(
 		@InjectModel(User) private userRepository: typeof User,
 		private readonly announcementService: AnnouncementService,
+		private readonly roleService: RoleService,
 	) { }
 
 	public async getAll(): Promise<User[]> {
-		return this.userRepository.findAll();
+		return this.userRepository.findAll({include:{all:true}});
 	}
 
 	public async getByEmail(email: string): Promise<User> {
@@ -34,7 +36,10 @@ export class UserService {
 	}
 
 	async create(data: CreateUserDto): Promise<User> {
-		return await this.userRepository.create(data);
+		const user = await this.userRepository.create(data);
+		const role = await this.roleService.getByName("USER")
+		await user.$set('roles', [role.id])
+		return user;
 	}
 
 	async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {

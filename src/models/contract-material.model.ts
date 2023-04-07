@@ -15,7 +15,7 @@ export class ContractMaterial extends Model<ContractMaterial>{
 	@ForeignKey(()=>Material)
 	@Column({ type: DataType.INTEGER })
 	public material_id: number;
-
+	
 	@Column
 	count: number
 }
