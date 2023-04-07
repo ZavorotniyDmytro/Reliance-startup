@@ -7,10 +7,11 @@ import { Review } from 'src/models/review.model';
 import { User } from 'src/models/user.model';
 import { Material } from 'src/models/material.model';
 import { ContractMaterial } from 'src/models/contract-material.model';
+import { Worker } from 'src/models/worker.model';
 
 @Module({
 	imports: [
-		SequelizeModule.forFeature([Contract, Review, User, Material, ContractMaterial])
+		SequelizeModule.forFeature([Contract, Review, User, Material, ContractMaterial, Worker])
 	],
 	controllers: [ContractController],
 	providers: [ContractService]

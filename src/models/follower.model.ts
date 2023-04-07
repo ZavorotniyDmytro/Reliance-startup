@@ -6,7 +6,7 @@ import { User } from "./user.model";
 
 
 
-@Table({ tableName: 'followers' })
+@Table({ tableName: 'followers', createdAt: false, updatedAt: false })
 export class Follower extends Model<Follower> {
 
 	@ApiProperty({example: 14, description: "Follower ID"})

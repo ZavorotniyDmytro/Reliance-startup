@@ -9,6 +9,8 @@ import { Review } from "./review.model";
 import { Role } from "./role.model";
 import { UserChat } from "./user-chat.model";
 import { UserRole } from "./user-role.model";
+import { Worker } from './worker.model';
+
 
 interface UserCreationAttrs {
 	email: string
@@ -23,7 +25,7 @@ export class User
 	@ApiProperty({ example: 1, description: "ID" })
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	public user_id: number;
-
+	
 	@ApiProperty({ example: 'John', description: "Name" })
 	@Column({ type: DataType.STRING(20), allowNull: false})
 	public name: string;
@@ -61,7 +63,10 @@ export class User
 	messages: Message[]
 
 	@HasMany(()=>Contract)
-	contracts: Contract[]
+	contracts_employers: Contract[]
+
+	@BelongsToMany(()=>Contract, ()=>Worker)
+	contracts_workers: Contract[]
 	
 	@BelongsToMany(()=>Role, ()=>UserRole)
 	roles: Role[]

@@ -12,14 +12,19 @@ export class ContractService {
 		){}
 
 	create(createContractDto: CreateContractDto):Promise<Contract> {
-		return this.contractRepository.create({
+		const contract = this.contractRepository.create({
 			...createContractDto, 
 			status:ContractStatus.ACTIVE
 		})
+
+		// const contract_material = this.contractMatrialRepository.findAll({where:{id:id, }});
+		// contract_material.$set('contract_materials', )
+		return contract
+
 	}
 
 	findAll():Promise<Contract[]> {
-		return this.contractRepository.findAll();
+		return this.contractRepository.findAll({where:{}});
 	}
 
 	findOne(id: number):Promise<Contract> {

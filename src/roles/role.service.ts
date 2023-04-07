@@ -17,28 +17,28 @@ export class RoleService {
 	}
 
 	async getById(id: number): Promise<Role> {
-		const user = await this.roleRepository.findOne({ where: { id: id } })
-		if (user) {
-			return user;
+		const role = await this.roleRepository.findOne({ where: { id: id } })
+		if (role) {
+			return role;
 		}
 		throw new HttpException("Role not found", HttpStatus.NOT_FOUND)
 	}
 
-	async findByValue(value: string): Promise<Role> {
-		const user = await this.roleRepository.findOne({ where: { value: value } })
-		if (user) {
-			return user;
+	async getByName(name: string): Promise<Role> {
+		const role = await this.roleRepository.findOne({ where: { name: name } })
+		if (role) {
+			return role;
 		}
 		throw new HttpException("Role not found", HttpStatus.NOT_FOUND)
 	}
 
 	async update(id: number, updateRoleDto: UpdateRoleDto): Promise<Role> {
-		const user = await this.getById(id);
-		return await user.update(updateRoleDto);
+		const role = await this.getById(id);
+		return await role.update(updateRoleDto);
 	}
 
 	async remove(id: number): Promise<void> {
-		const user = await this.getById(id);
-		await user.destroy();
+		const role = await this.getById(id);
+		await role.destroy();
 	}
 }
