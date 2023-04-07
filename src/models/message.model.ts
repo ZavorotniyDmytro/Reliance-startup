@@ -9,7 +9,7 @@ interface MessageCreationAttrs {
   	text: string;
 }
 
-@Table({ tableName: 'messages' })
+@Table({ tableName: 'messages', updatedAt: false })
 export class Message extends Model<Message, MessageCreationAttrs>{
 
 	@ApiProperty({example: 0, description: "MessagesID"})

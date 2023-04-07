@@ -5,6 +5,7 @@ import { ContractMaterial } from "./contract-material.model";
 import { Material } from "./material.model";
 import { Review } from "./review.model";
 import { User } from "./user.model";
+import { Worker } from './worker.model';
 
 interface ContractCreationAttrs {
     price:number;
@@ -14,7 +15,7 @@ interface ContractCreationAttrs {
 	 status: ContractStatus;
 }
 
-@Table({ tableName: 'contracts' })
+@Table({ tableName: 'contracts', updatedAt: false })
 export class Contract extends Model<Contract, ContractCreationAttrs>{
 
 	@ApiProperty({example: 1, description: "Contact ID"})
@@ -42,8 +43,8 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
    @Column({type: DataType.INTEGER })
    public worker_id: number;
 
-	@BelongsTo(() => User, 'worker_id')
-	worker: User
+	@BelongsToMany(() => User, ()=> Worker)
+	workers: Worker[]
 
    @ApiProperty({example: Date.now(), description: "Contract validity period"})
    @Column({type: DataType.DATE})

@@ -15,6 +15,7 @@ import { Message } from "../models/message.model";
 import { Resume } from "../models/resume.model";
 import { Role } from "../models/role.model";
 import { User } from '../models/user.model';
+import { Worker } from '../models/worker.model';
 
 @Module({
 	imports: [SequelizeModule.forRootAsync({
@@ -38,10 +39,7 @@ import { User } from '../models/user.model';
 				Resume, 
 				Review, 
 				Role, 
-				UserRole,
-				UserChat, 
-				User
-			],
+				UserRole, UserChat, User, Worker	],
 			autoLoadModels: true,
 			synchronize: true,
 		})

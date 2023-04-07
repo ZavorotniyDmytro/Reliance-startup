@@ -7,7 +7,7 @@ interface ResumeCreationAttrs {
 		experience: string;
 }
 
-@Table({ tableName: 'resumes' })
+@Table({ tableName: 'resumes', createdAt: false, updatedAt: false })
 export class Resume extends Model<Resume, ResumeCreationAttrs>{
 
 	@ApiProperty({example: 1, description: "ResumeID"})
