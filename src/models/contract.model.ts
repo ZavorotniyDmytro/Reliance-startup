@@ -44,7 +44,7 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
    public worker_id: number;
 
 	@BelongsToMany(() => User, ()=> Worker)
-	workers: Worker[]
+	workers: User[]
 
    @ApiProperty({example: Date.now(), description: "Contract validity period"})
    @Column({type: DataType.DATE})
