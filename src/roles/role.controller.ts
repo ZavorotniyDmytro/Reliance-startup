@@ -3,7 +3,7 @@ import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateRoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { Role } from '../models/role.model';
-import { RoleService } from './roles.service';
+import { RoleService } from './role.service';
 
 @ApiTags('Role API')
 @Controller('roles')

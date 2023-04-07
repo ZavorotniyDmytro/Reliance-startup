@@ -1,7 +1,14 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { SequelizeModule } from '@nestjs/sequelize';
+import { Announcement } from "src/models/announcement.model";
+import { Chat } from "src/models/chat.model";
+import { ContractMaterial } from "src/models/contract-material.model";
+import { Follower } from "src/models/follower.model";
+import { Material } from "src/models/material.model";
 import { Review } from "src/models/review.model";
+import { UserChat } from "src/models/user-chat.model";
+import { UserRole } from "src/models/user-role.model";
 
 import { Contract } from "../models/contract.model";
 import { Message } from "../models/message.model";
@@ -20,8 +27,23 @@ import { User } from '../models/user.model';
 			username: configService.get('POSTGRES_USER'),
 			password: configService.get('POSTGRES_PASSWORD'),
 			database: configService.get('POSTGRES_DB'),
-			models: [User, Role, Resume, Contract, Message, Review], // 
+			models: [
+				Announcement, 
+				Chat, 
+				Contract,
+				ContractMaterial,
+				Follower, 
+				Material, 
+				Message, 
+				Resume, 
+				Review, 
+				Role, 
+				UserRole,
+				UserChat, 
+				User
+			],
 			autoLoadModels: true,
+			synchronize: true,
 		})
 	}),]
 })

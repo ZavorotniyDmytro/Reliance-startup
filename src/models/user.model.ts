@@ -1,9 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { HasOne, Column, DataType, Model, Table, HasMany } from "sequelize-typescript";
+import { HasOne, Column, DataType, Model, Table, HasMany, BelongsToMany } from "sequelize-typescript";
+import { Announcement } from "./announcement.model";
+import { Chat } from "./chat.model";
 import { Contract } from "./contract.model";
 import { Message } from "./message.model";
 import { Resume } from "./resume.model";
 import { Review } from "./review.model";
+import { Role } from "./role.model";
+import { UserChat } from "./user-chat.model";
+import { UserRole } from "./user-role.model";
 
 interface UserCreationAttrs {
 	email: string
@@ -14,7 +19,7 @@ interface UserCreationAttrs {
 export class User 
 						extends Model<User, UserCreationAttrs> 
 						implements UserCreationAttrs{
-
+							
 	@ApiProperty({ example: 1, description: "ID" })
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	public user_id: number;
@@ -43,9 +48,11 @@ export class User
 	@HasOne(()=>Resume)
 	resumes: Resume
 
-	// announcements [] (o t m)
+	@HasMany(()=>Announcement)
+	announcements: Announcement[]
 
-	// chats [] (m t m)
+	@BelongsToMany(()=>Chat, ()=>UserChat)
+	chats: Chat[]
 
 	@HasMany(()=> Review)
 	reviews:Review[]
@@ -56,5 +63,6 @@ export class User
 	@HasMany(()=>Contract)
 	contracts: Contract[]
 	
-	// roles [] (m t m)
+	@BelongsToMany(()=>Role, ()=>UserRole)
+	roles: Role[]
 }
