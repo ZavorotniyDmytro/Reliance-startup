@@ -52,7 +52,7 @@ export class UserService {
 		await user.destroy();
 	}
 
-	public getAllAnnouncement(user_id: string) {
+	public getAllAnnouncements(user_id: string) {
 		return this.announcementService.getByOwnerId_MOCKS(user_id);
 	}
 
