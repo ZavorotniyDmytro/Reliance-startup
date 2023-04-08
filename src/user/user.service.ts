@@ -16,7 +16,13 @@ export class UserService {
 	) { }
 
 	public async getAll(): Promise<User[]> {
-		return this.userRepository.findAll({include:{all:true}});
+		return await this.userRepository.findAll({include:{all:true}});
+	}
+
+	public async getUsersByIDs(ids: number[]): Promise<User[]> {
+		const workers = await this.userRepository.findAll({where:{user_id:[...ids]}, include:{all:true}});
+		console.log(`\nnice\n`)
+		return workers
 	}
 
 	public async getByEmail(email: string): Promise<User> {
