@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserController } from './user.controller';
 import { AnnouncementModule } from 'src/announcement/announcement.module';
@@ -16,10 +16,12 @@ import { UserRole } from 'src/models/user-role.model';
 import { UserChat } from 'src/models/user-chat.model';
 import { RolesModule } from 'src/roles/role.module';
 import { Worker } from 'src/models/worker.model';
+import { ContractModule } from 'src/contract/contract.module';
 
 @Module({
 	imports: [
 		AnnouncementModule,
+		forwardRef(() =>ContractModule),
 		ResumeModule,
 		RolesModule,
 		SequelizeModule.forFeature([

@@ -15,12 +15,15 @@ import { Resume } from 'src/models/resume.model';
 import { ResumeService } from 'src/resume/resume.service';
 import { User } from '../models/user.model';
 import { UserService } from './user.service';
+import { ContractService } from 'src/contract/contract.service';
+import { Contract } from 'src/models/contract.model';
 
 @Controller('users')
 export class UserController {
 	constructor(
 		private readonly userService: UserService,
-		private readonly resumeService: ResumeService
+		private readonly resumeService: ResumeService,
+		private readonly contractService: ContractService,
 	) { }
 	
 	// GET /users - повертає список всіх користувачів
@@ -94,7 +97,7 @@ export class UserController {
 	@ApiTags("Resume API")
 	@ApiOperation({ summary: "Get resume" })
 	@ApiResponse({ status: 200, type: [Resume] })
-	@Get(':user_id/resumes/:id')
+	@Get(':user_id/resumes/:id') // TODO must be two params in function
 	getResumeById(@Param('id') id: number): Promise<Resume> {
 		// TODO check resumeService
 		return this.resumeService.getById(id);
@@ -104,7 +107,7 @@ export class UserController {
 	@ApiTags("Resume API")
 	@ApiOperation({ summary: "Update resume by Id" })
 	@ApiResponse({ status: 203, type: ResumeDto })
-	@Put(':user_id/resumes/:id')
+	@Put(':user_id/resumes/:id') // TODO must be two params in function
 	async updateResume(@Param('id') id: number, @Body() data: Partial<Resume>): Promise<Resume> {
 		// TODO check resumeService
 		return this.resumeService.update(id, data);
@@ -114,14 +117,30 @@ export class UserController {
 	@ApiTags("Resume API")
 	@ApiOperation({ summary: "Delete resume by Id" })
 	@ApiResponse({ status: 204, type: Resume })
-	@Delete(':user_id/resumes/:id')
+	@Delete(':user_id/resumes/:id') // TODO must be two params in function
 	async deleteResume(@Param('id') id: number): Promise<void> {
 		// TODO check resumeService
 		this.resumeService.delete(id);
 	}
 
 	// GET /users/{user_id}/contracts/employer - повертає список всіх контрактів, пов'язаних з конкретним користувачем (роботодавцем)
+	@ApiTags("Contract API")
+	@ApiOperation({ summary: "Get contracts by employerId" })
+	@ApiResponse({ status: 200, type: [Contract] })
+	@Get(':user_id/contracts/employer')
+	async getEmployerById(@Param('user_id') user_id: number): Promise<Contract[]> {
+		return this.contractService.findByEmployerId(user_id)
+	}
+
 	// GET /users/{user_id}/contracts/worker - повертає список всіх контрактів, пов'язаних з конкретним користувачем (Робітником)
+	@ApiTags("Contract API")
+	@ApiOperation({ summary: "Get contracts by workerId" })
+	@ApiResponse({ status: 200, type: [Contract] })
+	@Get(':user_id/contracts/worker')
+	async getWorkerById(@Param('user_id') user_id: number): Promise<Contract[]> {
+		return this.contractService.findByWorkerId(user_id)
+	}
+
 
 	// GET /users/{user_id}/chats - повертає список всіх чатів, пов'язаних з конкретним користувачем
 	// GET /users/{user_id}/messages - повертає список всіх повідомлень, пов'язаних з конкретним користувачем

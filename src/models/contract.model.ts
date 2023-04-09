@@ -16,7 +16,7 @@ interface ContractCreationAttrs {
 }
 
 @Table({ tableName: 'contracts', updatedAt: false })
-export class Contract extends Model<Contract, ContractCreationAttrs>{
+export class Contract extends Model<Contract>{
 
 	@ApiProperty({example: 1, description: "Contact ID"})
    @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
@@ -38,13 +38,8 @@ export class Contract extends Model<Contract, ContractCreationAttrs>{
 	@BelongsTo(() => User, 'employer_id')
 	employer: User
 	
-	@ApiProperty({example: 11, description: "Worker user ID"})
-	@ForeignKey(()=>User)
-   @Column({type: DataType.INTEGER })
-   public worker_id: number;
-
 	@BelongsToMany(() => User, ()=> Worker)
-	workers: Worker[]
+	workers: User[]
 
    @ApiProperty({example: Date.now(), description: "Contract validity period"})
    @Column({type: DataType.DATE})
