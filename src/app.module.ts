@@ -25,9 +25,10 @@ import { ReviewModule } from './review/review.module';
 				POSTGRES_DB: Joi.string().required(),
 				POSTGRES_PASSWORD: Joi.string().required(),
 				POSTGRES_PORT: Joi.number().default(5432),
-				EMAIL_SERVICE: Joi.string().required(),
-        		EMAIL_USER: Joi.string().required(),
-        		EMAIL_PASSWORD: Joi.string().required(),
+				MAIL_HOST: Joi.string().required(),
+        		MAIL_USER: Joi.string().required(),
+        		MAIL_PASSWORD: Joi.string().required(),
+
 			})
 		}),
 		UserModule,

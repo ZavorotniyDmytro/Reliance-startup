@@ -23,11 +23,11 @@ import { Worker } from '../models/worker.model';
 		inject: [ConfigService],
 		useFactory: (configService: ConfigService) => ({
 			dialect: 'postgres',
-			host: configService.get('POSTGRES_HOST'),
-			port: configService.get('POSTGRES_PORT'),
-			username: configService.get('POSTGRES_USER'),
-			password: configService.get('POSTGRES_PASSWORD'),
-			database: configService.get('POSTGRES_DB'),
+			host: configService.get<string>('POSTGRES_HOST'),
+			port: configService.get<number>('POSTGRES_PORT'),
+			username: configService.get<string>('POSTGRES_USER'),
+			password: configService.get<string>('POSTGRES_PASSWORD'),
+			database: configService.get<string>('POSTGRES_DB'),
 			models: [
 				Announcement, 
 				Chat, 

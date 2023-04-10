@@ -1,8 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { hasSubscribers } from 'diagnostics_channel';
 import { User } from 'src/models/user.model';
-import { Worker } from 'src/models/worker.model';
 import { UserService } from 'src/user/user.service';
 import { Contract } from '../models/contract.model';
 import { ContractStatus } from './contrartStatus.enum';
@@ -13,7 +11,6 @@ import { UpdateContractDto } from './dto/update-contract.dto';
 export class ContractService {
 	constructor(
 		@InjectModel(Contract) private contractRepository: typeof Contract,
-		@InjectModel(Worker) private workerRepository: typeof Worker,
 		private readonly userService: UserService,
 		){}
 
@@ -67,8 +64,9 @@ export class ContractService {
 	  });
 	}
 
-	update(id: number, updateContractDto: UpdateContractDto) {
-		return `This action updates a #${id} contract`;
+	async update(id: number, updateContractDto: UpdateContractDto) {
+		const contract = await this.findOne(id);
+		return await contract.update(updateContractDto);
 	}
 
 	async delete(id: number):Promise<void> {

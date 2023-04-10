@@ -1,4 +1,5 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Put } from '@nestjs/common/decorators';
 import { ContractService } from './contract.service';
 import { CreateContractDto } from './dto/create-contract.dto';
 import { UpdateContractDto } from './dto/update-contract.dto';
@@ -18,13 +19,13 @@ export class ContractController {
 	}
 
 	@Get(':id')
-	findOne(@Param('id') id: string) {
+	findOne(@Param('id') id: number) {
 		return this.contractService.findOne(+id);
 	}
 
-	@Patch(':id')
-	update(@Param('id') id: string, @Body() updateContractDto: UpdateContractDto) {
-		return this.contractService.update(+id, updateContractDto);
+	@Put(':id')
+	update(@Param('id') id: number, @Body() updateContractDto: UpdateContractDto) {
+		return this.contractService.update(id, updateContractDto);
 	}
 
 	@Delete(':id')

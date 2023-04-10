@@ -16,6 +16,14 @@ export class Review extends Model<Review, ReviewCreationAttrs>{
 	@ApiProperty({example: 1, description: "Review ID"})
    @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
    public review_id: number;
+	
+	@ApiProperty({example:2 , description: "Reviewer ID"})
+	@ForeignKey(()=>User)
+	@Column({type: DataType.INTEGER, allowNull: false})
+	public reviewer_id: number
+
+	@BelongsTo(()=>User, 'reviewer_id')
+	public reviewer: User
 
 	@ApiProperty({example:2 , description: "User ID"})
 	@ForeignKey(()=>User)
@@ -27,7 +35,7 @@ export class Review extends Model<Review, ReviewCreationAttrs>{
 
 	@ApiProperty({example:14 , description: "Contract ID"})
 	@ForeignKey(()=>Contract)
-	@Column({type: DataType.INTEGER, allowNull: false, unique: true})
+	@Column({type: DataType.INTEGER, allowNull: false})
 	public contract_id: number
 
 	@BelongsTo(()=>Contract, 'contract_id')
