@@ -28,7 +28,7 @@ import { ReviewModule } from './review/review.module';
 				MAIL_HOST: Joi.string().required(),
         		MAIL_USER: Joi.string().required(),
         		MAIL_PASSWORD: Joi.string().required(),
-
+				WEBHOOKSITE_URL: Joi.string().required(),
 			})
 		}),
 		UserModule,

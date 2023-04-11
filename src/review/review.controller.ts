@@ -3,19 +3,24 @@ import { ReviewService } from './review.service';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { UpdateReviewDto } from './dto/update-review.dto';
 import { HttpService } from '@nestjs/axios/dist';
+import { ConfigService } from '@nestjs/config';
 
 @Controller('reviews')
 export class ReviewController {
   	constructor(
 		private readonly reviewService: ReviewService,
-		private readonly httpService: HttpService
+		private readonly httpService: HttpService,
+		private readonly configService: ConfigService,
 		) {}
 
   	@Post()
   	async createReview(@Body() review: CreateReviewDto) {
     	const createdReview = await this.reviewService.create(review);
 
-		// this.httpService.post('https://webhook.site/dacccec6-6017-4dce-b464-dbaf28d7f980')
+		// this.httpService.post(
+		// 	this.configService.get<string>('WEBHOOKSITE_URL'),
+		//		// must be data
+		// 		)
 		// 	.subscribe({
 		// 		complete: () => { 
 		// 			console.log('---------- WEBHOOK USED -----------'); 

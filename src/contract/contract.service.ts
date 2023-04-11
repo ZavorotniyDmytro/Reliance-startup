@@ -40,7 +40,7 @@ export class ContractService {
 	}
 
 	async findOne(id: number):Promise<Contract> {
-		return await this.contractRepository.findOne({where:{id:id}});
+		return await this.contractRepository.findOne({where:{id:id}, include:{all:true}});
 	}
 
 	async findByEmployerId(employer_id: number):Promise<Contract[]> {

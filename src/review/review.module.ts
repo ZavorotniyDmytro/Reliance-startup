@@ -16,6 +16,7 @@ import { SendGridModule } from '@anchan828/nest-sendgrid';
 		ContractModule,
 		HttpModule,
 		UserModule,
+		ConfigModule,
 		SequelizeModule.forFeature([
 			Review, User, Contract
 		]),
@@ -27,7 +28,7 @@ import { SendGridModule } from '@anchan828/nest-sendgrid';
 			inject: [ConfigService],
 			useFactory: async (configService: ConfigService) => ({
 			  transport: {
-				 host: configService.get<string>('MAIL_HOST'),
+				 host: configService.get<string>('MAIL_HOST'), //smtp.gmail.com
 				 //secure: false,
 				 //port: 587,//25, 587	(for unencrypted/TLS connections)  465	(for SSL connections)
 				 auth: {

@@ -51,11 +51,16 @@ export class ReviewService {
 		({
 			 to: user.email,//user.email, // list of receivers
 			 from: 'reliace.manager@gmail.com', // sender address
-			 subject: 'Testing Nest MailerModule ✔', // Subject line
+			 subject: `${reviewer.name} left a feedback about you✔`, // Subject line
 			 text: `Hello, ${user.name}.\n${reviewer.name} left a review about you related to the contract - "${text}"`, // plaintext body
-			 html: '<b>welcome</b>', // HTML body content
+			 html: `<strong>Hello, ${user.name}.\n${reviewer.name} left a review about you related to the contract - "${text}"</strong>`, // HTML body content
 		  })
-		  .then(() => { console.log("MAIL SENDED")})
-		  .catch((err) => { console.log(`Error mail sand + ${err}`)});
+		  .then(() => { 
+			console.log(`MAIL SENDED from: reliace.manager@gmail.com to ${user.email}`)
+		})
+		  .catch((err) => { 
+			console.log(`${err}`)
+			// throw new HttpException(`MailSendException: ${err},HttpStatus.`)
+		});
 	 }
 }
