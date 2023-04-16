@@ -14,6 +14,7 @@ import { ResumeModule } from './resume/resume.module';
 import { RolesModule } from './roles/role.module';
 import { ContractModule } from './contract/contract.module';
 import { ReviewModule } from './review/review.module';
+import { AswModule } from './asw/asw.module';
 
 @Module({
 	imports: [
@@ -39,7 +40,8 @@ import { ReviewModule } from './review/review.module';
 		ResumeModule,
 		RolesModule,
 		ContractModule,
-		ReviewModule
+		ReviewModule,
+		AswModule
 	],
 	controllers: [AppController],
 	providers: [AppService],
