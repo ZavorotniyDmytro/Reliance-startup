@@ -2,33 +2,42 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { FollowerService } from './follower.service';
 import { CreateFollowerDto } from './dto/create-follower.dto';
 import { UpdateFollowerDto } from './dto/update-follower.dto';
+import { HttpService } from '@nestjs/axios/dist';
+import { ConfigService } from '@nestjs/config';
+import { Follower } from 'src/models/follower.model';
 
-@Controller('follower')
+@Controller('followers')
 export class FollowerController {
-  constructor(private readonly followerService: FollowerService) {}
+  	constructor(
+		private readonly followerService: FollowerService,
+		private readonly httpService: HttpService,
+		private readonly configService: ConfigService,
+		) {}
 
-  @Post()
-  create(@Body() createFollowerDto: CreateFollowerDto) {
-    return this.followerService.create(createFollowerDto);
-  }
+  	@Post()
+  	async createFollower(@Body() follower: CreateFollowerDto) {
+    	const createdFollower = await this.followerService.create(follower);
 
-  @Get()
-  findAll() {
-    return this.followerService.findAll();
-  }
+		// this.httpService.post(
+		// 	this.configService.get<string>('WEBHOOKSITE_URL'),
+		//		// must be data
+		// 		)
+		// 	.subscribe({
+		// 		complete: () => { 
+		// 			console.log('---------- WEBHOOK USED -----------'); 
+		// 		}, 
+		// 		error: (err) => { 
+		// 			console.log(`error - ${err}`); 
+		// 		},
+		// 	})
+		await this.followerService.sendMailCreate(follower.follow_announcement_id, follower.user_id)
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.followerService.findOne(+id);
-  }
+		return createdFollower
+  	}
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFollowerDto: UpdateFollowerDto) {
-    return this.followerService.update(+id, updateFollowerDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.followerService.remove(+id);
-  }
+	
+	  @Get()
+	  getAllReview(){
+		  return this.followerService.findAll()
+	  }
 }

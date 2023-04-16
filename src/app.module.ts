@@ -16,6 +16,7 @@ import { ContractModule } from './contract/contract.module';
 import { ReviewModule } from './review/review.module';
 import { FollowerModule } from './follower/follower.module';
 
+
 @Module({
 	imports: [
 		ConfigModule.forRoot({
@@ -41,7 +42,7 @@ import { FollowerModule } from './follower/follower.module';
 		RolesModule,
 		ContractModule,
 		ReviewModule,
-		FollowerModule
+		FollowerModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],
