@@ -38,6 +38,7 @@
     "@types/cookie-parser": "^1.4.3",
     "@types/passport-jwt": "^3.0.8",
     "@types/passport-local": "^1.0.35",
+    "aws-sdk": "^2.1359.0",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",

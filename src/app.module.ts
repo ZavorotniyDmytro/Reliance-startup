@@ -1,10 +1,9 @@
-import * as Joi from '@hapi/joi';
+
 import { Module } from '@nestjs/common';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './user/user.module';
 import { ChatsModule } from './chats/chats.module';
 import { AuthenticationModule } from './authentication/authentication.module';
@@ -14,24 +13,12 @@ import { ResumeModule } from './resume/resume.module';
 import { RolesModule } from './roles/role.module';
 import { ContractModule } from './contract/contract.module';
 import { ReviewModule } from './review/review.module';
-import { AswModule } from './asw/asw.module';
+import { S3Module } from './awsS3/s3.module';
+import { ConfigModule } from './config/config.module';
 
 @Module({
 	imports: [
-		ConfigModule.forRoot({
-			validationSchema: Joi.object({
-				PORT: Joi.number(),
-				POSTGRES_HOST: Joi.string().required(),
-				POSTGRES_USER: Joi.string().required(),
-				POSTGRES_DB: Joi.string().required(),
-				POSTGRES_PASSWORD: Joi.string().required(),
-				POSTGRES_PORT: Joi.number().default(5432),
-				MAIL_HOST: Joi.string().required(),
-        		MAIL_USER: Joi.string().required(),
-        		MAIL_PASSWORD: Joi.string().required(),
-				WEBHOOKSITE_URL: Joi.string().required(),
-			})
-		}),
+		ConfigModule,
 		UserModule,
 		ChatsModule,
 		AnnouncementModule,
@@ -41,7 +28,8 @@ import { AswModule } from './asw/asw.module';
 		RolesModule,
 		ContractModule,
 		ReviewModule,
-		AswModule
+		S3Module,
+		ConfigModule
 	],
 	controllers: [AppController],
 	providers: [AppService],
