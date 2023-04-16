@@ -44,7 +44,7 @@ export class FollowerService {
 		({
 			 to: user.email,//user.email, // list of receivers
 			 from: 'reliace.manager@gmail.com', // sender address
-			 subject: `${follower.name} left a feedback about you✔`, // Subject line
+			 subject: `${follower.name} subscribed to your announcement✔`, // Subject line
 		  })
 		  .then(() => { 
 			console.log(`MAIL SENDED from: reliace.manager@gmail.com to ${user.email}`)
