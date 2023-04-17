@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { ApiResponse, ApiTags } from '@nestjs/swagger/dist';
-import { Announcement } from 'src/announcement/dto/announcement/create-announcement.dto';
+//import { Announcement } from 'src/announcement/dto/announcement/create-announcement.dto';
 import { ResumeDto } from 'src/resume/dto/resume-dto';
 import { Resume } from 'src/models/resume.model';
 import { ResumeService } from 'src/resume/resume.service';
@@ -87,15 +87,15 @@ export class UserController {
 		this.userService.delete(id);
 	}
 
-	// GET /users/{user_id}/announcements - повертає список всіх оголошень, створених конкретним користувачем
-	@ApiTags("User API")
-	@ApiOperation({ summary: "Get all announcement by user ID" })
-	@ApiResponse({ status: 200, type: Announcement })
-	@Get(':user_id/announcements')
-	getAllAnnouncement(@Param('user_id') user_id: number) {
-		// TODO update this code. Rewrite getAllAnnouncements in userService
-		return this.userService.getAllAnnouncements(''+user_id);
-	}
+	// // GET /users/{user_id}/announcements - повертає список всіх оголошень, створених конкретним користувачем
+	// @ApiTags("User API")
+	// @ApiOperation({ summary: "Get all announcement by user ID" })
+	// @ApiResponse({ status: 200, type: Announcement })
+	// @Get(':user_id/announcements')
+	// getAllAnnouncement(@Param('user_id') user_id: number) {
+	// 	// TODO update this code. Rewrite getAllAnnouncements in userService
+	// 	return this.userService.getAllAnnouncements(''+user_id);
+	// }
 
 	// POST /users/{user_id}/resumes - створює нове резюме для конкретного користувача
 	@ApiTags("Resume API")

@@ -1,6 +1,4 @@
-import { Announcement } from "src/announcement/dto/announcement/create-announcement.dto";
-
-export const announcementMOCK: Announcement[] = [{
+export const announcementMOCK = [{
 	id: 1,
 	title: "some title",
 	ownerId: "3",

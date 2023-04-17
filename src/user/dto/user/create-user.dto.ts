@@ -1,10 +1,6 @@
 //import { IsString, IsNotEmpty, IsNumber } from "class-validator";
 
 import { ApiProperty } from "@nestjs/swagger/dist";
-import { Announcement } from "src/announcement/dto/announcement/create-announcement.dto";
-import { CreateChatDto } from "src/chats/dto/chats-dto";
-import { announcementMOCK } from "src/mocks/announcement.mock";
-import { ChatMocks } from "src/mocks/chat.mock";
 
 export class CreateUserDto {
 

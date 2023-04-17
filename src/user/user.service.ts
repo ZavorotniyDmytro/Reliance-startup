@@ -58,9 +58,9 @@ export class UserService {
 		await user.destroy();
 	}
 
-	public getAllAnnouncements(user_id: string) {
-		return this.announcementService.getByOwnerId_MOCKS(user_id);
-	}
+	// public getAllAnnouncements(user_id: string) {
+	// 	return this.announcementService.getByOwnerId_MOCKS(user_id);
+	// }
 
 	async getDataForResume(user_id: number): Promise<ResumeUserDto> {
 		let user = (await this.getById(user_id))["dataValues"];

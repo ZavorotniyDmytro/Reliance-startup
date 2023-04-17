@@ -1,10 +1,8 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { FollowerService } from './follower.service';
 import { CreateFollowerDto } from './dto/create-follower.dto';
-import { UpdateFollowerDto } from './dto/update-follower.dto';
 import { HttpService } from '@nestjs/axios/dist';
 import { ConfigService } from '@nestjs/config';
-import { Follower } from 'src/models/follower.model';
 
 @Controller('followers')
 export class FollowerController {
@@ -30,7 +28,7 @@ export class FollowerController {
 		// 			console.log(`error - ${err}`); 
 		// 		},
 		// 	})
-		await this.followerService.sendMailCreate(follower.follow_announcement_id, follower.user_id)
+		await this.followerService.sendMailCreate(follower.announcement_id, follower.user_id)
 
 		return createdFollower
   	}

@@ -10,10 +10,11 @@ import { ContractModule } from 'src/contract/contract.module';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { UserModule } from 'src/user/user.module';
-import { SendGridModule } from '@anchan828/nest-sendgrid';
+import { AnnouncementModule } from 'src/announcement/announcement.module';
 
 @Module({
 	imports:[
+		AnnouncementModule,
 		ContractModule,
 		HttpModule,
 		UserModule,

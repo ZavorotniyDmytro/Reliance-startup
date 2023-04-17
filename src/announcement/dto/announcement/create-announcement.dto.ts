@@ -1,11 +1,8 @@
-export class Announcement {
-	public id: number
+export class CreateAnnouncementDto {
+	public id?: number
 	public title: string
-	public ownerId: string
+	public user_id: number
 	public content: string
-	public description: string
-
-	//public followers
 }
 
 
