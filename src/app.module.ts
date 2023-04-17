@@ -15,6 +15,8 @@ import { ContractModule } from './contract/contract.module';
 import { ReviewModule } from './review/review.module';
 import { S3Module } from './awsS3/s3.module';
 import { ConfigModule } from './config/config.module';
+import { FollowerModule } from './follower/follower.module';
+
 
 @Module({
 	imports: [
@@ -29,7 +31,8 @@ import { ConfigModule } from './config/config.module';
 		ContractModule,
 		ReviewModule,
 		S3Module,
-		ConfigModule
+		ConfigModule,
+		FollowerModule,
 	],
 	controllers: [AppController],
 	providers: [AppService],

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ReviewService } from './review.service';
-import { ReviewController } from './review.controller';
+import { FollowerService } from './follower.service';
+import { FollowerController } from './follower.controller';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { Review } from 'src/models/review.model';
+import { Follower } from 'src/models/follower.model';
 import { User } from 'src/models/user.model';
 import { Contract } from 'src/models/contract.model';
 import { HttpModule } from '@nestjs/axios'; 
@@ -12,8 +12,6 @@ import { ConfigModule, ConfigService } from "@nestjs/config";
 import { UserModule } from 'src/user/user.module';
 import { SendGridModule } from '@anchan828/nest-sendgrid';
 
-
-
 @Module({
 	imports:[
 		ContractModule,
@@ -21,7 +19,7 @@ import { SendGridModule } from '@anchan828/nest-sendgrid';
 		UserModule,
 		ConfigModule,
 		SequelizeModule.forFeature([
-			Review, User, Contract
+			Follower, User, Contract
 		]),
 		// SendGridModule.forRoot({			
 		// 	apikey: process.env.MAIL_PASSWORD,					  
@@ -42,8 +40,9 @@ import { SendGridModule } from '@anchan828/nest-sendgrid';
 			}),			
 		 }),
 	],
-	controllers: [ReviewController],
-	providers: [ReviewService],
-	exports:	[ReviewService]
+	controllers: [FollowerController],
+	providers: [FollowerService],
+	exports:	[FollowerService]
 })
-export class ReviewModule {}
+export class FollowerModule {}
+
