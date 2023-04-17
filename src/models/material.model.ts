@@ -21,7 +21,7 @@ export class Material extends Model<Material, MaterialCreationAttrs> {
 
 	@ApiProperty({example: "Lorem ipsum dolor sit amet", description: "Announcement content"})
    @Column({type: DataType.STRING, allowNull: false})
-   public discription: string;
+   public description: string;
 
 	@BelongsToMany(()=>Contract, ()=>ContractMaterial)
 	where_used: Contract[]

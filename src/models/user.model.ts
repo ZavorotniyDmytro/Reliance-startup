@@ -46,6 +46,9 @@ export class User
 	@Column({ type: DataType.STRING(32), allowNull: false })
 	public password: string;
 
+	@ApiProperty({ example: '.../avatar3.png', description: "Avatar" })
+	@Column({ type: DataType.STRING })
+	public avatar_url: string;
 
 	@HasOne(()=>Resume)
 	resumes: Resume

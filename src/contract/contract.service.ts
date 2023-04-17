@@ -19,12 +19,11 @@ export class ContractService {
 		
 		const workers = await this.userService.getUsersByIDs(createContractDto.worker_id)		
 
+		delete createContractDto.worker_id
+
 		const contract = await this.contractRepository.create({
-			discription: createContractDto.discription,
-			price: createContractDto.price,
-			validity_period: createContractDto.validity_period,
-			status: ContractStatus.ACTIVE,
-			employer_id: createContractDto.employer_id,
+			...createContractDto,
+			status: ContractStatus.ACTIVE
 		})	
 		
 		await contract.$set('workers', workers)

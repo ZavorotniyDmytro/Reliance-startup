@@ -6,6 +6,8 @@ import {
 	Param,
 	Post,
 	Put,
+	UploadedFile,
+	UseInterceptors,
 } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { ApiResponse, ApiTags } from '@nestjs/swagger/dist';
@@ -17,6 +19,8 @@ import { User } from '../models/user.model';
 import { UserService } from './user.service';
 import { ContractService } from 'src/contract/contract.service';
 import { Contract } from 'src/models/contract.model';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { S3Service } from 'src/awsS3/s3.service';
 
 @Controller('users')
 export class UserController {
@@ -24,6 +28,7 @@ export class UserController {
 		private readonly userService: UserService,
 		private readonly resumeService: ResumeService,
 		private readonly contractService: ContractService,
+		private readonly s3Service: S3Service
 	) { }
 	
 	// GET /users - повертає список всіх користувачів
@@ -53,6 +58,17 @@ export class UserController {
 		return this.userService.create(data);
 	}
 
+	@ApiTags("User API")
+	@ApiOperation({ summary: "Upload user avatar" })
+	@ApiResponse({ status: 200, type: User })
+	@UseInterceptors(FileInterceptor('file'))
+	@Post(':user_id/upload')
+	async uploadFile(@Param('user_id') user_id: number, @UploadedFile() file: Express.Multer.File):Promise<string> {
+		const avatar_url = await this.s3Service.uploadFileToS3(file);
+		await this.userService.update(user_id, { avatar_url });
+    	return avatar_url;
+	}
+
 	// PUT /users/{id} - оновлює конкретного користувача за його ідентифікатором
 	@ApiTags("User API")
 	@ApiOperation({ summary: "Update user by ID" })
@@ -76,9 +92,9 @@ export class UserController {
 	@ApiOperation({ summary: "Get all announcement by user ID" })
 	@ApiResponse({ status: 200, type: Announcement })
 	@Get(':user_id/announcements')
-	getAllAnnouncement(@Param('user_id') user_id: string) {
+	getAllAnnouncement(@Param('user_id') user_id: number) {
 		// TODO update this code. Rewrite getAllAnnouncements in userService
-		return this.userService.getAllAnnouncements(user_id);
+		return this.userService.getAllAnnouncements(''+user_id);
 	}
 
 	// POST /users/{user_id}/resumes - створює нове резюме для конкретного користувача

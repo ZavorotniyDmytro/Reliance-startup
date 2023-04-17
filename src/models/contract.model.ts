@@ -24,7 +24,7 @@ export class Contract extends Model<Contract>{
 
    @ApiProperty({example: "Some contract. Rules: ...", description: "Contact discription", })
    @Column({type: DataType.STRING, allowNull: false})
-   public discription: string;
+   public description: string;
     
    @ApiProperty({example: 400, description: "Contract price"})
    @Column({type: DataType.INTEGER })
