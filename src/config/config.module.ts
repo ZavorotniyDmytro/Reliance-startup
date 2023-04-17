@@ -11,7 +11,7 @@ import { ConfigModule as NestConfigModule } from '@nestjs/config';
 			POSTGRES_USER: Joi.string().required(),
 			POSTGRES_DB: Joi.string().required(),
 			POSTGRES_PASSWORD: Joi.string().required(),
-			POSTGRES_PORT: Joi.number().default(5432),
+			POSTGRES_PORT: Joi.number().required().default(5432),
 			MAIL_HOST: Joi.string().required(),
 			MAIL_USER: Joi.string().required(),
 			MAIL_PASSWORD: Joi.string().required(),
@@ -19,6 +19,7 @@ import { ConfigModule as NestConfigModule } from '@nestjs/config';
 			S3_ACCESS_KEY_ID: Joi.string().required(),
 			S3_SECRET_ACCESS_KEY: Joi.string().required(),
 			BUCKET_NAME: Joi.string().required(),
+			AWS_REGION: Joi.string().required().default('eu-central-1')
 		})
 	}),]
 })

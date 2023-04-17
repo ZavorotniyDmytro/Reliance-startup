@@ -27,6 +27,9 @@ export class CreateUserDto {
 	//@IsNotEmpty()
 	public password: string;
 
+	@ApiProperty({ example: 'some/url/to_avatar.png', description: "Avatar url" })
+	public avatar_url: string;
+
 	// @ApiProperty({ example: announcementMOCK, description: "Announcement list" })
 	// public announcement_list: Announcement[] = [];
 

@@ -17,10 +17,12 @@ import { UserChat } from 'src/models/user-chat.model';
 import { RolesModule } from 'src/roles/role.module';
 import { Worker } from 'src/models/worker.model';
 import { ContractModule } from 'src/contract/contract.module';
+import { S3Module } from 'src/awsS3/s3.module';
 
 @Module({
 	imports: [
 		AnnouncementModule,
+		S3Module,
 		forwardRef(() =>ContractModule),
 		ResumeModule,
 		RolesModule,
