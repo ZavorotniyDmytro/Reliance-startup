@@ -2,14 +2,14 @@ import { forwardRef, Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { ContractService } from './contract.service';
 import { ContractController } from './contract.controller';
-import { Contract } from 'src/models/contract.model';
-import { Review } from 'src/models/review.model';
-import { User } from 'src/models/user.model';
-import { Material } from 'src/models/material.model';
-import { ContractMaterial } from 'src/models/contract-material.model';
-import { Worker } from 'src/models/worker.model';
+import { Contract } from '@lib/models/contract.model';
+import { Review } from '@lib/models/review.model';
+import { User } from '@lib/models/user.model';
+import { Material } from '@lib/models/material.model';
+import { ContractMaterial } from '@lib/models/contract-material.model';
+import { Worker } from '@lib/models/worker.model';
 import { UserModule } from 'src/user/user.module';
-import { Follower } from 'src/models/follower.model';
+import { Follower } from '@lib/models/follower.model';
 
 @Module({
 	imports: [forwardRef(() =>UserModule),

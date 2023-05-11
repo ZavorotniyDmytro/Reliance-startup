@@ -30,9 +30,5 @@ export class Message extends Model<Message, MessageCreationAttrs>{
 	chat_id: number;
 
 	@BelongsTo(() => User, 'chat_id')
-	chat: Chat;
-
-
-	// skills [] ( o t m)
-	
+	chat: Chat;	
 }

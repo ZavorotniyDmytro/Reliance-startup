@@ -107,7 +107,9 @@
       "<rootDir>/libs/"
     ],
     "moduleNameMapper": {
-      "^lib/providers(|/.*)$": "<rootDir>/libs/providers/src/$1"
+      "^lib/providers(|/.*)$": "<rootDir>/libs/providers/src/$1",
+      "^@app/models(|/.*)$": "<rootDir>/libs/models/src/$1",
+      "^@lib/models(|/.*)$": "<rootDir>/libs/models/src/$1"
     }
   }
 }

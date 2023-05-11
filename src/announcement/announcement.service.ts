@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { UpdateAnnouncementDto } from './dto/announcement/update-announcement.dto';
 import { InjectModel } from '@nestjs/sequelize';
-import { Announcement } from 'src/models/announcement.model';
+import { Announcement } from '@lib/models/announcement.model';
 import { CreateAnnouncementDto } from './dto/announcement/create-announcement.dto';
 
 @Injectable()

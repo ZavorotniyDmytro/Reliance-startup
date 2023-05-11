@@ -5,9 +5,9 @@ import { RolesController } from './role.controller';
 
 import { SequelizeModule } from '@nestjs/sequelize';
 
-import { Role } from '../models/role.model';
-import { User } from '../models/user.model';
-import { UserRole } from '../models/user-role.model';
+import { Role } from '../../libs/models/src/role.model';
+import { User } from '../../libs/models/src/user.model';
+import { UserRole } from '../../libs/models/src/user-role.model';
 
 @Module({
 	controllers: [RolesController],

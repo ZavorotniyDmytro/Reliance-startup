@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { ResumeDto } from './dto/resume-dto';
 import { UpdateResumeDto } from './dto/update-resume-dto';
-import { Resume } from '../models/resume.model';
+import { Resume } from '../../libs/models/src/resume.model';
 
 @Injectable()
 export class ResumeService {

@@ -13,12 +13,12 @@ import { ApiOperation } from '@nestjs/swagger';
 import { ApiResponse, ApiTags } from '@nestjs/swagger/dist';
 //import { Announcement } from 'src/announcement/dto/announcement/create-announcement.dto';
 import { ResumeDto } from 'src/resume/dto/resume-dto';
-import { Resume } from 'src/models/resume.model';
+import { Resume } from '@lib/models/resume.model';
 import { ResumeService } from 'src/resume/resume.service';
-import { User } from '../models/user.model';
+import { User } from '../../libs/models/src/user.model';
 import { UserService } from './user.service';
 import { ContractService } from 'src/contract/contract.service';
-import { Contract } from 'src/models/contract.model';
+import { Contract } from '@lib/models/contract.model';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { S3Service } from 'src/awsS3/s3.service';
 

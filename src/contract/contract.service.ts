@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { User } from 'src/models/user.model';
+import { User } from '@lib/models/user.model';
 import { UserService } from 'src/user/user.service';
-import { Contract } from '../models/contract.model';
+import { Contract } from '../../libs/models/src/contract.model';
 import { ContractStatus } from './contrartStatus.enum';
 import { CreateContractDto } from './dto/create-contract.dto';
 import { UpdateContractDto } from './dto/update-contract.dto';

@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateReviewDto } from './dto/create-review.dto';
-import { Review } from '../models/review.model';
+import { Review } from '../../libs/models/src/review.model';
 import { ContractService } from 'src/contract/contract.service';
-import { Contract } from 'src/models/contract.model';
+import { Contract } from '@lib/models/contract.model';
 import { HttpException } from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
 import { ContractStatus } from 'src/contract/contrartStatus.enum';

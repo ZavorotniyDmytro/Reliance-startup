@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateFollowerDto } from './dto/create-follower.dto';
-import { Follower } from 'src/models/follower.model';
+import { Follower } from '@lib/models/follower.model';
 import { MailerService } from '@nestjs-modules/mailer/dist';
 import { UserService } from 'src/user/user.service';
 import { AnnouncementService } from 'src/announcement/announcement.service';

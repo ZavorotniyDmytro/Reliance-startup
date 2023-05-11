@@ -18,11 +18,17 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "lib/providers": [
+      "@lib/providers": [
         "libs/providers/src"
       ],
-      "lib/providers/*": [
+      "@lib/providers/*": [
         "libs/providers/src/*"
+      ],
+      "@lib/models": [
+        "libs/models/src"
+      ],
+      "@lib/models/*": [
+        "libs/models/src/*"
       ]
     }
   }
