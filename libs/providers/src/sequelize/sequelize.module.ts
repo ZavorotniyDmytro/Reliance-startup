@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ConfigModule } from '@nestjs/config';
+import * as Joi from '@hapi/joi';
 import { SequelizeModule as GlobalSequelizeModule } from '@nestjs/sequelize';
 import { Chat, Contract, ContractMaterial, Follower, Material, Message, Resume, Review, Role, User, UserChat, UserRole, Worker } from '@lib/models';
 import { Announcement } from '@lib/models';
@@ -9,7 +10,17 @@ import { Announcement } from '@lib/models';
 
 
 @Module({
-	imports: [GlobalSequelizeModule.forRootAsync({
+	imports: [ConfigModule.forRoot({
+		envFilePath: ['./libs/providers/.env'],
+		validationSchema: Joi.object({
+			POSTGRES_HOST: Joi.string().required(),
+			POSTGRES_USER: Joi.string().required(),
+			POSTGRES_DB: Joi.string().required(),
+			POSTGRES_PASSWORD: Joi.string().required(),
+			POSTGRES_PORT: Joi.number().required().default(5432),		
+		})
+	}),
+	GlobalSequelizeModule.forRootAsync({
 		imports: [ConfigModule],
 		inject: [ConfigService],
 		useFactory:  (configService: ConfigService) => ({

@@ -4,14 +4,9 @@ import { ConfigModule as NestConfigModule } from '@nestjs/config';
 
 @Module({
 	imports:[NestConfigModule.forRoot({
-		isGlobal: true,
+		envFilePath: ['.env',],
 		validationSchema: Joi.object({
 			PORT: Joi.number(),
-			POSTGRES_HOST: Joi.string().required(),
-			POSTGRES_USER: Joi.string().required(),
-			POSTGRES_DB: Joi.string().required(),
-			POSTGRES_PASSWORD: Joi.string().required(),
-			POSTGRES_PORT: Joi.number().required().default(5432),
 			MAIL_HOST: Joi.string().required(),
 			MAIL_USER: Joi.string().required(),
 			MAIL_PASSWORD: Joi.string().required(),
