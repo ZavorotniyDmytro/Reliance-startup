@@ -108,6 +108,7 @@ export class UserController {
 		const resume_data = ({ ...data, user_id, ...user_data });
 		return this.resumeService.create(resume_data);
 	}
+<<<<<<< Updated upstream
 
 	// GET /users/{user_id}/resumes/{id} - повертає конкретне резюме конкретного користувача за його ідентифікатором
 	@ApiTags("Resume API")
@@ -177,5 +178,8 @@ export class UserController {
 
 
 	// 
+=======
+	// get :user_id/chats
+>>>>>>> Stashed changes
 }
 
