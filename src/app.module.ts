@@ -1,9 +1,6 @@
 
 import { Module } from '@nestjs/common';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-
 import { UserModule } from './user/user.module';
 import { ChatsModule } from './chats/chats.module';
 import { AuthenticationModule } from './authentication/authentication.module';
@@ -34,7 +31,5 @@ import { ProvidersModule } from 'libs/providers/src';
 		ConfigModule,
 		FollowerModule,
 	],
-	controllers: [AppController],
-	providers: [AppService],
 })
 export class AppModule { }

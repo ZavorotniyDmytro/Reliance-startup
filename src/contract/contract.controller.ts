@@ -1,35 +1,60 @@
 import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
-import { Put } from '@nestjs/common/decorators';
-import { ContractService } from './contract.service';
+import { Inject, Put } from '@nestjs/common/decorators';
+import { ClientProxy } from '@nestjs/microservices/client';
 import { CreateContractDto } from './dto/create-contract.dto';
 import { UpdateContractDto } from './dto/update-contract.dto';
 
-@Controller('contract')
+@Controller('contracts')
 export class ContractController {
-  constructor(private readonly contractService: ContractService) {}
+  	constructor(@Inject("CONTRACT_SERVICE") private readonly contractService: ClientProxy) {}
 
 	@Post()
 	create(@Body() createContractDto: CreateContractDto) {
-		return this.contractService.create(createContractDto);
+		return this.contractService.send({
+			cmd: 'create-contract'
+		}, createContractDto)
 	}
+
 
 	@Get()
 	findAll() {
-		return this.contractService.findAll();
+		return this.contractService.send({
+			cmd: 'find-all-contract'
+		}, '')
 	}
 
-	@Get(':id')
+	@Get('/:id')
 	findOne(@Param('id') id: number) {
-		return this.contractService.findOne(+id);
+		return this.contractService.send({
+			cmd: 'find-one-contract'
+		}, id)
 	}
 
-	@Put(':id')
-	update(@Param('id') id: number, @Body() updateContractDto: UpdateContractDto) {
-		return this.contractService.update(id, updateContractDto);
+	@Get('/worker/:id')
+	findAllByWorker(@Param('id') id: number) {
+		return this.contractService.send({
+			cmd:'find-all-by-worker-contract'
+		}, id)
 	}
 
-	@Delete(':id')
-	remove(@Param('id') id: number) {
-		return this.contractService.delete(id);
+	@Get('/employer/:id')
+	findAllByEmployer(@Param('id') id: number) {
+		return this.contractService.send({
+			cmd:'find-all-by-employer-contract'
+		}, id)
+	}
+
+	@Put()
+	update(@Body() updateContractDto: UpdateContractDto) {
+		return this.contractService.send({
+				cmd:'update-contract'
+			}, updateContractDto)
+	}
+
+	@Delete('/:id')
+	delete(@Param('id') id: number) {
+		return this.contractService.send({
+			cmd:'remove-contract'
+		}, id)
 	}
 }

@@ -1,5 +1,3 @@
-import { ContractStatus } from "../contrartStatus.enum";
-
 export class CreateContractDto {
 	description: string;
 	price: number;

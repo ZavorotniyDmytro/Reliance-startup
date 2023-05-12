@@ -1,6 +1,5 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { ContractService } from './contract.service';
 import { ContractController } from './contract.controller';
 import { Contract } from '@lib/models/contract.model';
 import { Review } from '@lib/models/review.model';
@@ -10,13 +9,31 @@ import { ContractMaterial } from '@lib/models/contract-material.model';
 import { Worker } from '@lib/models/worker.model';
 import { UserModule } from 'src/user/user.module';
 import { Follower } from '@lib/models/follower.model';
+import { ConfigService } from '@nestjs/config';
+import { ClientProxyFactory, Transport } from '@nestjs/microservices';
+
+function ContractService(){
+	return {
+      provide: 'CONTRACT_SERVICE',
+      useFactory: (configService: ConfigService) => (
+			ClientProxyFactory.create({
+				transport: Transport.TCP,
+				options: {
+					host: configService.get('CONTRACT_SERVICE_HOST'),
+					port: configService.get('CONTRACT_SERVICE_PORT'),
+				}
+			})
+      ),
+      inject: [ConfigService],
+    }
+}
 
 @Module({
 	imports: [forwardRef(() =>UserModule),
 		SequelizeModule.forFeature([Contract, Review,Follower, User, Material, ContractMaterial, Worker])
 	],
 	controllers: [ContractController],
-	providers: [ContractService],
-	exports: [ContractService]
+	providers: [ContractService()],
+	exports: [ContractService()]
 })
 export class ContractModule {}

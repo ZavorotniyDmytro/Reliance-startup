@@ -4,4 +4,3 @@ export enum ContractStatus {
 	CANCELED = 'canceled',
 	FROZEN = 'frozen'
 }
-

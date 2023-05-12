@@ -1,30 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
+import { ClientProxy } from '@nestjs/microservices/client';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { Review } from '../../libs/models/src/review.model';
-import { ContractService } from 'src/contract/contract.service';
 import { Contract } from '@lib/models/contract.model';
 import { HttpException } from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
-import { ContractStatus } from 'src/contract/contrartStatus.enum';
+import { ContractStatus } from 'src/contract/contractStatus.enum';
 import { MailerService } from '@nestjs-modules/mailer/dist';
 import { UserService } from 'src/user/user.service';
-import { SendGridService } from '@anchan828/nest-sendgrid';
 
 @Injectable()
 export class ReviewService {
 	constructor(
 		@InjectModel(Review) private reviewRepository: typeof Review,
-		private readonly contractService: ContractService,
-		//private readonly sendGridService: SendGridService,
+		@Inject("CONTRACT_SERVICE") private readonly contractService: ClientProxy,
 		private readonly mailerService: MailerService,
 		private readonly userService: UserService
 		){}
 
 	async create(createReviewDto: CreateReviewDto):Promise<Review> {
-		const contract = await this.contractService.findOne(createReviewDto.contract_id)
+		const contract = this.contractService
+			.send({cmd:'find-one-contract'}, createReviewDto.contract_id)
+			.subscribe((c)=>{return c})
 
-		if (this.checkContract(contract))
+		if (this.checkContract(contract.unsubscribe()))
 			return await this.reviewRepository.create(createReviewDto);
 
 		throw new HttpException('The contract is not completed', HttpStatus.BAD_REQUEST)		
