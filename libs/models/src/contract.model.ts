@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasOne, Model, Table } from "sequelize-typescript";
-import { ContractStatus } from "../../../src/contract/contrartStatus.enum";
+import { ContractStatus } from "src/contract/contractStatus.enum";
 import { ContractMaterial } from "./contract-material.model";
 import { Material } from "./material.model";
 import { Review } from "./review.model";

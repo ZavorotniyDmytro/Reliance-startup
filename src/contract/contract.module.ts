@@ -9,31 +9,30 @@ import { ContractMaterial } from '@lib/models/contract-material.model';
 import { Worker } from '@lib/models/worker.model';
 import { UserModule } from 'src/user/user.module';
 import { Follower } from '@lib/models/follower.model';
-import { ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 
-function ContractService(){
-	return {
-      provide: 'CONTRACT_SERVICE',
-      useFactory: (configService: ConfigService) => (
-			ClientProxyFactory.create({
-				transport: Transport.TCP,
-				options: {
-					host: configService.get('CONTRACT_SERVICE_HOST'),
-					port: configService.get('CONTRACT_SERVICE_PORT'),
-				}
-			})
-      ),
-      inject: [ConfigService],
-    }
+const ContractService = {
+   provide: 'CONTRACT_SERVICE',
+   useFactory: (configService: ConfigService) => (
+		ClientProxyFactory.create({
+			transport: Transport.TCP,
+			options: {
+				host: configService.get('CONTRACT_SERVICE_HOST'),
+				port: configService.get('CONTRACT_SERVICE_PORT'),
+			}
+		})
+   ),
+   inject: [ConfigService],
+	imports: [ConfigModule]   
 }
 
 @Module({
-	imports: [forwardRef(() =>UserModule),
+	imports: [ConfigModule, forwardRef(() =>UserModule),
 		SequelizeModule.forFeature([Contract, Review,Follower, User, Material, ContractMaterial, Worker])
 	],
 	controllers: [ContractController],
-	providers: [ContractService()],
-	exports: [ContractService()]
+	providers: [ContractService],
+	exports: [ContractService]
 })
 export class ContractModule {}

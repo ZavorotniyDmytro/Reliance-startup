@@ -6,7 +6,7 @@ import { UpdateContractDto } from './dto/update-contract.dto';
 
 @Controller('contracts')
 export class ContractController {
-  	constructor(@Inject("CONTRACT_SERVICE") private readonly contractService: ClientProxy) {}
+  	constructor(@Inject("CONTRACT_SERVICE") private contractService: ClientProxy) {}
 
 	@Post()
 	create(@Body() createContractDto: CreateContractDto) {

@@ -9,12 +9,13 @@ import { HttpStatus } from '@nestjs/common/enums';
 import { ContractStatus } from 'src/contract/contractStatus.enum';
 import { MailerService } from '@nestjs-modules/mailer/dist';
 import { UserService } from 'src/user/user.service';
+import { lastValueFrom, map } from 'rxjs';
 
 @Injectable()
 export class ReviewService {
 	constructor(
 		@InjectModel(Review) private reviewRepository: typeof Review,
-		@Inject("CONTRACT_SERVICE") private readonly contractService: ClientProxy,
+		@Inject("CONTRACT_SERVICE") private contractService: ClientProxy,
 		private readonly mailerService: MailerService,
 		private readonly userService: UserService
 		){}
@@ -22,9 +23,13 @@ export class ReviewService {
 	async create(createReviewDto: CreateReviewDto):Promise<Review> {
 		const contract = this.contractService
 			.send({cmd:'find-one-contract'}, createReviewDto.contract_id)
-			.subscribe((c)=>{return c})
+			.pipe(
+				map((c) => {
+				  return c;
+				}),
+			 );
 
-		if (this.checkContract(contract.unsubscribe()))
+		if (this.checkContract(await lastValueFrom(contract)))
 			return await this.reviewRepository.create(createReviewDto);
 
 		throw new HttpException('The contract is not completed', HttpStatus.BAD_REQUEST)		

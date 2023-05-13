@@ -11,7 +11,6 @@ import { RoleService } from 'src/roles/role.service';
 export class UserService {
 	constructor(
 		@InjectModel(User) private userRepository: typeof User,
-		private readonly announcementService: AnnouncementService,
 		private readonly roleService: RoleService,
 	) { }
 
@@ -20,8 +19,7 @@ export class UserService {
 	}
 
 	public async getUsersByIDs(ids: number[]): Promise<User[]> {
-		const workers = await this.userRepository.findAll({where:{user_id:[...ids]}, include:{all:true}});
-		console.log(`\nnice\n`)
+		const workers = await this.userRepository.findAll({where:{user_id:[...ids]}, include:{all:true}});		
 		return workers
 	}
 

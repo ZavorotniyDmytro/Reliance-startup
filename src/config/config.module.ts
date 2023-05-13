@@ -14,7 +14,12 @@ import { ConfigModule as NestConfigModule } from '@nestjs/config';
 			S3_ACCESS_KEY_ID: Joi.string().required(),
 			S3_SECRET_ACCESS_KEY: Joi.string().required(),
 			BUCKET_NAME: Joi.string().required(),
-			AWS_REGION: Joi.string().required().default('eu-central-1')
+			AWS_REGION: Joi.string().required().default('eu-central-1'),
+			MAIN_SERVICE_HOST: Joi.string().required(),
+			MAIN_SERVICE_PORT: Joi.number().required().default(5001),
+			CONTRACT_SERVICE_HOST: Joi.string().required(),
+			CONTRACT_SERVICE_PORT: Joi.number().required().default(5002),
+			
 		})
 	}),]
 })

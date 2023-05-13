@@ -1,6 +1,7 @@
-import { ValidationPipe } from '@nestjs/common';
+
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from '@nestjs/swagger/dist';
 import * as cookieParser from 'cookie-parser';
@@ -11,10 +12,15 @@ async function bootstrap() {
 	app.use(cookieParser());
 	const configService = app.get(ConfigService);
 
-	const PORT = configService.get('PORT') ?? 3000;
-	await app.listen(PORT, () => 	console.log(`Server start in PORT = ${PORT}`));
-
-	
+	await app.connectMicroservice<MicroserviceOptions>({
+		transport: Transport.TCP,
+		options: {
+		  	port: configService.get('PORT'),
+		},
+	});
+	app.startAllMicroservices();	
+	const PORT = configService.get<number>('PORT')
+	app.listen(PORT, ()=>console.log(`Server started at port ${PORT}`))
 	const configSwagger = new DocumentBuilder()
 		.setTitle('Reliance API')
 		.setDescription('Documentation Reliance REST API')
@@ -23,5 +29,7 @@ async function bootstrap() {
 
 	const document = SwaggerModule.createDocument(app, configSwagger)
 	SwaggerModule.setup('/api/docs', app, document)
+	
+	
 }
 bootstrap();

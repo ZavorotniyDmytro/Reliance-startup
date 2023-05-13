@@ -3,6 +3,7 @@ import {
 	Controller,
 	Delete,
 	Get,
+	Inject,
 	Param,
 	Post,
 	Put,
@@ -11,23 +12,24 @@ import {
 } from '@nestjs/common';
 import { ApiOperation } from '@nestjs/swagger';
 import { ApiResponse, ApiTags } from '@nestjs/swagger/dist';
-//import { Announcement } from 'src/announcement/dto/announcement/create-announcement.dto';
 import { ResumeDto } from 'src/resume/dto/resume-dto';
 import { Resume } from '@lib/models/resume.model';
 import { ResumeService } from 'src/resume/resume.service';
 import { User } from '../../libs/models/src/user.model';
 import { UserService } from './user.service';
-import { ContractService } from 'src/contract/contract.service';
 import { Contract } from '@lib/models/contract.model';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { S3Service } from 'src/awsS3/s3.service';
+import { ClientProxy, MessagePattern } from '@nestjs/microservices';
+import { from, lastValueFrom, map } from 'rxjs';
+import { IContrantData } from './interfaces/contractData.interface';
 
 @Controller('users')
 export class UserController {
 	constructor(
 		private readonly userService: UserService,
 		private readonly resumeService: ResumeService,
-		private readonly contractService: ContractService,
+		@Inject("CONTRACT_SERVICE") private readonly contractService: ClientProxy,
 		private readonly s3Service: S3Service
 	) { }
 	
@@ -47,6 +49,12 @@ export class UserController {
 	@Get(':id')
 	getUserById(@Param('id') id: number): Promise<User> {
 		return this.userService.getById(id);
+	}
+
+	@MessagePattern({cmd: 'get-users-by-id'})
+	async getUsersById(@Body() ids: number[]){		
+		const users = await this.userService.getUsersByIDs(ids)		
+		return from(users)
 	}
 
 	// POST /users - створює нового користувача
@@ -108,7 +116,6 @@ export class UserController {
 		const resume_data = ({ ...data, user_id, ...user_data });
 		return this.resumeService.create(resume_data);
 	}
-<<<<<<< Updated upstream
 
 	// GET /users/{user_id}/resumes/{id} - повертає конкретне резюме конкретного користувача за його ідентифікатором
 	@ApiTags("Resume API")
@@ -146,7 +153,14 @@ export class UserController {
 	@ApiResponse({ status: 200, type: [Contract] })
 	@Get(':user_id/contracts/employer')
 	async getEmployerById(@Param('user_id') user_id: number): Promise<Contract[]> {
-		return this.contractService.findByEmployerId(user_id)
+		const contracts$ = this.contractService
+			.send({cmd:"find-all-by-employer-contract"}, user_id)
+			.pipe(
+				map((c) => {
+				  return c;
+				}),
+			 );
+		return await lastValueFrom(contracts$)
 	}
 
 	// GET /users/{user_id}/contracts/worker - повертає список всіх контрактів, пов'язаних з конкретним користувачем (Робітником)
@@ -155,7 +169,14 @@ export class UserController {
 	@ApiResponse({ status: 200, type: [Contract] })
 	@Get(':user_id/contracts/worker')
 	async getWorkerById(@Param('user_id') user_id: number): Promise<Contract[]> {
-		return this.contractService.findByWorkerId(user_id)
+		const contracts$ = this.contractService
+			.send({cmd:"find-all-by-worker-contract"}, user_id)
+			.pipe(
+				map((c) => {
+				  return c;
+				}),
+			 );
+		return await lastValueFrom(contracts$)
 	}
 
 
@@ -178,8 +199,6 @@ export class UserController {
 
 
 	// 
-=======
-	// get :user_id/chats
->>>>>>> Stashed changes
+
 }
 
