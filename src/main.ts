@@ -12,13 +12,24 @@ async function bootstrap() {
 	app.use(cookieParser());
 	const configService = app.get(ConfigService);
 
-	await app.connectMicroservice<MicroserviceOptions>({
-		transport: Transport.TCP,
+	const user = configService.get('RABBITMQ_DEFAULT_USER')
+	const password = configService.get('RABBITMQ_DEFAULT_PASS')
+	const host = configService.get('RABBITMQ_HOST')
+	const queue = configService.get('RABBITMQ_QUEUE_NAME_MAIN')
+
+	app.connectMicroservice<MicroserviceOptions>({
+		transport: Transport.RMQ,
 		options: {
-		  	port: configService.get('PORT'),
+			urls: [`amqp://${user}:${password}@${host}`],
+			queue: queue,
+			queueOptions: {
+				durable: true,
+			},
 		},
 	});
-	app.startAllMicroservices();	
+	
+	app.startAllMicroservices();
+
 	const PORT = configService.get<number>('PORT')
 	app.listen(PORT, ()=>console.log(`Server started at port ${PORT}`))
 	const configSwagger = new DocumentBuilder()

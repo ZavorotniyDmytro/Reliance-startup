@@ -14,15 +14,23 @@ import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 
 const ContractService = {
    provide: 'CONTRACT_SERVICE',
-   useFactory: (configService: ConfigService) => (
-		ClientProxyFactory.create({
-			transport: Transport.TCP,
+   useFactory: (configService: ConfigService) => {
+		const user = configService.get('RABBITMQ_DEFAULT_USER')
+		const password = configService.get('RABBITMQ_DEFAULT_PASS')
+		const host = configService.get('RABBITMQ_HOST')
+		const queue = configService.get('RABBITMQ_QUEUE_NAME')
+
+		return ClientProxyFactory.create({
+			transport: Transport.RMQ,
 			options: {
-				host: configService.get('CONTRACT_SERVICE_HOST'),
-				port: configService.get('CONTRACT_SERVICE_PORT'),
-			}
-		})
-   ),
+			  urls: [`amqp://${user}:${password}@${host}`],
+			  queue: queue,
+			  queueOptions: {
+				 durable: true,
+			  },
+			},
+		 })
+	},
    inject: [ConfigService],
 	imports: [ConfigModule]   
 }
