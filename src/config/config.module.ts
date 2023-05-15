@@ -19,7 +19,11 @@ import { ConfigModule as NestConfigModule } from '@nestjs/config';
 			MAIN_SERVICE_PORT: Joi.number().required().default(5001),
 			CONTRACT_SERVICE_HOST: Joi.string().required(),
 			CONTRACT_SERVICE_PORT: Joi.number().required().default(5002),
-			
+			RABBITMQ_DEFAULT_USER: Joi.string().required(),
+			RABBITMQ_DEFAULT_PASS: Joi.string().required(),
+			RABBITMQ_HOST: Joi.string().required(),
+			RABBITMQ_QUEUE_NAME_CONTRACT: Joi.string().required(),
+			RABBITMQ_QUEUE_NAME_MAIN: Joi.string().required(),
 		})
 	}),]
 })

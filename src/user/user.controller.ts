@@ -20,9 +20,8 @@ import { UserService } from './user.service';
 import { Contract } from '@lib/models/contract.model';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { S3Service } from 'src/awsS3/s3.service';
-import { ClientProxy, MessagePattern } from '@nestjs/microservices';
+import { ClientProxy, Ctx, MessagePattern, Payload, RmqContext } from '@nestjs/microservices';
 import { from, lastValueFrom, map } from 'rxjs';
-import { IContrantData } from './interfaces/contractData.interface';
 
 @Controller('users')
 export class UserController {
@@ -52,8 +51,11 @@ export class UserController {
 	}
 
 	@MessagePattern({cmd: 'get-users-by-id'})
-	async getUsersById(@Body() ids: number[]){		
-		const users = await this.userService.getUsersByIDs(ids)		
+	async getUsersById(@Payload() ids: number[], @Ctx() context: RmqContext){		
+		const users = await this.userService.getUsersByIDs(ids)
+		const channel = context.getChannelRef();
+  		const originalMsg = context.getMessage();
+  		channel.ack(originalMsg);
 		return from(users)
 	}
 

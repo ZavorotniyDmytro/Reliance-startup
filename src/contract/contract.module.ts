@@ -18,7 +18,7 @@ const ContractService = {
 		const user = configService.get('RABBITMQ_DEFAULT_USER')
 		const password = configService.get('RABBITMQ_DEFAULT_PASS')
 		const host = configService.get('RABBITMQ_HOST')
-		const queue = configService.get('RABBITMQ_QUEUE_NAME')
+		const queue = configService.get('RABBITMQ_QUEUE_NAME_CONTRACT')
 
 		return ClientProxyFactory.create({
 			transport: Transport.RMQ,
