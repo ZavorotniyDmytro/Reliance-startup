@@ -29,7 +29,7 @@ async function bootstrap() {
       	prefetchCount: 1,
 		},
 	});
-	
+
 	app.startAllMicroservices();
 
 	const PORT = configService.get<number>('PORT')
@@ -42,7 +42,7 @@ async function bootstrap() {
 
 	const document = SwaggerModule.createDocument(app, configSwagger)
 	SwaggerModule.setup('/api/docs', app, document)
-	
-	
+
+
 }
 bootstrap();

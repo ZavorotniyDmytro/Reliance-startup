@@ -31,7 +31,7 @@ export class UserController {
 		@Inject("CONTRACT_SERVICE") private readonly contractService: ClientProxy,
 		private readonly s3Service: S3Service
 	) { }
-	
+
 	// GET /users - повертає список всіх користувачів
 	@ApiTags("User API")
 	@ApiOperation({ summary: "Get all users" })
@@ -51,7 +51,7 @@ export class UserController {
 	}
 
 	@MessagePattern({cmd: 'get-users-by-id'})
-	async getUsersById(@Payload() ids: number[], @Ctx() context: RmqContext){		
+	async getUsersById(@Payload() ids: number[], @Ctx() context: RmqContext){
 		const users = await this.userService.getUsersByIDs(ids)
 		const channel = context.getChannelRef();
   		const originalMsg = context.getMessage();
@@ -185,14 +185,14 @@ export class UserController {
 	// GET /users/{user_id}/chats - повертає список всіх чатів, пов'язаних з конкретним користувачем
 	// GET /users/{user_id}/messages - повертає список всіх повідомлень, пов'язаних з конкретним користувачем
 	// GET /users/{user_id}/reviews - повертає список всіх відгуків, пов'язаних з конкретним користувачем
-	
+
 	// TODO the announcement must not have a controller, only module and service
 	// GET /users/{user_id}/announcements - повертає список всіх оголошень, створених конкретним користувачем
 	// POST /users/{user_id}/announcements - створює нове оголошення для конкретного користувача
 	// GET /users/{user_id}/announcements/{id} - повертає конкретне оголошення конкретного користувача за його ідентифікатором
 	// PUT /users/{user_id}/announcements/{id} - оновлює конкретне оголошення конкретного користувача за його ідентифікатором
 	// DELETE /users/{user_id}/announcements/{id} - видаляє конкретне оголошення конкретного користувача за його ідентифікаторо
-	
+
 	// GET /users/{user_id}/announcements/{id}/followers - повертає список всіх підписників конкретного оголошення
 	// POST /users/{user_id}/announcements/{id}/followers - додає нового підписника до списку підписників конкретного оголошення
 	// GET /users/{user_id}/announcements/{id}/followers/{id} - повертає конкретного підписника конкретного оголошення за його ідентифікатором
@@ -200,7 +200,6 @@ export class UserController {
 	// DELETE /users/{user_id}/announcements/{id}/followers/{id} - видаляє конкретного підписника конкретного оголошення за його ідентифікатором
 
 
-	// 
+	//
 
 }
-

@@ -29,6 +29,6 @@ export class Message extends Model<Message, MessageCreationAttrs>{
 	@Column({type: DataType.INTEGER, allowNull: false})
 	chat_id: number;
 
-	@BelongsTo(() => User, 'chat_id')
-	chat: Chat;	
+	@BelongsTo(() => Chat, 'chat_id')
+	chat: Chat;
 }
