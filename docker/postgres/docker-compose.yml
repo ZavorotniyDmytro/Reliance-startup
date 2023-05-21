@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   postgres:
-    container_name: postgres
+    container_name: postgres_reliance
     image: postgres:latest
     ports:
       - "5432:5432"
@@ -14,7 +14,7 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=admin
     networks:
-      - postgres
+      - postgres_reliance
 
   pgadmin:
     links:
@@ -29,8 +29,8 @@ services:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=admin
     networks:
-      - postgres
+      - postgres_reliance
 
 networks:
-  postgres:
+  postgres_reliance:
     driver: bridge
