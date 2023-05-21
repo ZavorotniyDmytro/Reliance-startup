@@ -13,6 +13,7 @@ import { S3Module } from './awsS3/s3.module';
 import { ConfigModule } from './config/config.module';
 import { FollowerModule } from './follower/follower.module';
 import { ProvidersModule } from 'libs/providers/src';
+import { GatewayModule } from './gateway/gateway.module';
 
 
 @Module({
@@ -30,6 +31,7 @@ import { ProvidersModule } from 'libs/providers/src';
 		S3Module,
 		ConfigModule,
 		FollowerModule,
+		GatewayModule,
 	],
 })
 export class AppModule { }
