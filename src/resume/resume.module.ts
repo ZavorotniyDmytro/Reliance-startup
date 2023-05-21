@@ -7,7 +7,7 @@ import { User } from '@lib/models/user.model';
 
 @Module({
   providers: [ResumeService],
-  imports: [ 
+  imports: [
     SequelizeModule.forFeature([Resume, User])
   ],
   exports: [ResumeService]

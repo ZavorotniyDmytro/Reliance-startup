@@ -18,14 +18,14 @@ interface UserCreationAttrs {
 }
 
 @Table({ tableName: 'users' })
-export class User 
-						extends Model<User, UserCreationAttrs> 
+export class User
+						extends Model<User, UserCreationAttrs>
 						implements UserCreationAttrs{
-							
+
 	@ApiProperty({ example: 1, description: "ID" })
 	@Column({ type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true })
 	public user_id: number;
-	
+
 	@ApiProperty({ example: 'John', description: "Name" })
 	@Column({ type: DataType.STRING(20), allowNull: false})
 	public name: string;
@@ -70,7 +70,7 @@ export class User
 
 	@BelongsToMany(()=>Contract, ()=>Worker)
 	contracts_workers: Contract[]
-	
+
 	@BelongsToMany(()=>Role, ()=>UserRole)
 	roles: Role[]
 }

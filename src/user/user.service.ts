@@ -19,7 +19,7 @@ export class UserService {
 	}
 
 	public async getUsersByIDs(ids: number[]): Promise<User[]> {
-		const workers = await this.userRepository.findAll({where:{user_id:[...ids]}, include:{all:true}});		
+		const workers = await this.userRepository.findAll({where:{user_id:[...ids]}, include:{all:true}});
 		return workers
 	}
 

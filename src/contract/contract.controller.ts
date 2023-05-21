@@ -10,6 +10,7 @@ export class ContractController {
 
 	@Post()
 	create(@Body() createContractDto: CreateContractDto) {
+		console.log("1")
 		return this.contractService.send({
 			cmd: 'create-contract'
 		}, createContractDto)

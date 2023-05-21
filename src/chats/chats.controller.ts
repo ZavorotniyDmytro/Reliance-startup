@@ -20,7 +20,7 @@ export class ChatsController {
     @ApiTags("Chat API")
 	@ApiOperation({ summary: "Get chat by Id" })
 	@ApiResponse({ status: 200, type: CreateChatDto })
-    @Get(':id') 
+    @Get(':id')
     getChat(@Param('id') id: string) {
         return this.chatsService.getChatById(id);
     }
@@ -32,7 +32,7 @@ export class ChatsController {
     createChat(@Body() chatDto: CreateChatDto) {
         return this.chatsService.createChat(chatDto);
     }
-    
+
     @ApiTags("Chat API")
 	@ApiOperation({ summary: "Delete chat by Id" })
 	@ApiResponse({ status: 200, type: CreateChatDto })
@@ -48,4 +48,13 @@ export class ChatsController {
     updateChat(@Body() updateChatDto: UpdateChatDto, @Param('id') id: string) {
         this.chatsService.updateChat(updateChatDto ,id);
     }
+
+    @ApiTags("Chat API")
+    @ApiOperation({ summary: "Handle chat webhook" })
+    @Post('webhook')
+    handleWebhook(@Body() webhookData: any) {
+    // Обробка отриманого вебхуку
+    // Тут ви можете виконати необхідні дії залежно від отриманих даних вебхуку
+}
+
 }

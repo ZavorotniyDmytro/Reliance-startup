@@ -28,5 +28,5 @@ export class S3Service {
 		return result.Location;
 	}
 
-	
+
 }
