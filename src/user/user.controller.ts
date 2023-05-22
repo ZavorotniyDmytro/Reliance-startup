@@ -22,6 +22,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { S3Service } from 'src/awsS3/s3.service';
 import { ClientProxy, Ctx, MessagePattern, Payload, RmqContext } from '@nestjs/microservices';
 import { from, lastValueFrom, map } from 'rxjs';
+import { UpdateUserDto } from './dto/user/update-user.dto';
+import { CreateUserDto } from './dto/user/create-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -64,8 +66,8 @@ export class UserController {
 	@ApiOperation({ summary: "Create user" })
 	@ApiResponse({ status: 201, type: User })
 	@Post()
-	async create(@Body() data: User): Promise<User> {
-		return this.userService.create(data);
+	async create(@Body() data: CreateUserDto): Promise<User> {
+		return await this.userService.create(data);
 	}
 
 	@ApiTags("User API")
@@ -84,7 +86,7 @@ export class UserController {
 	@ApiOperation({ summary: "Update user by ID" })
 	@ApiResponse({ status: 200, type: Promise<User> })
 	@Put(':id')
-	async update(@Param('id') id: number, @Body() data: Partial<User>): Promise<User> {
+	async update(@Param('id') id: number, @Body() data: UpdateUserDto): Promise<User> {
 		return this.userService.update(id, data);
 	}
 

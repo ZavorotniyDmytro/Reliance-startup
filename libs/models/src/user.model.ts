@@ -13,8 +13,11 @@ import { Worker } from './worker.model';
 
 
 interface UserCreationAttrs {
+	name: string;
 	email: string
 	password: string
+	age: number;
+	phone: string;
 }
 
 @Table({ tableName: 'users' })

@@ -1,4 +1,5 @@
 
+import { BadRequestException, ValidationError, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
@@ -16,6 +17,13 @@ async function bootstrap() {
 	const password = configService.get('RABBITMQ_DEFAULT_PASS')
 	const host = configService.get('RABBITMQ_HOST')
 	const queue = configService.get('RABBITMQ_QUEUE_NAME_MAIN')
+	app.useGlobalPipes(
+		new ValidationPipe({
+		  exceptionFactory: (validationErrors: ValidationError[] = []) => {
+			 return new BadRequestException(validationErrors);
+		  },
+		})
+	 );
 
 	app.connectMicroservice<MicroserviceOptions>({
 		transport: Transport.RMQ,

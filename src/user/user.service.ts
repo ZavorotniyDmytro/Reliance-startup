@@ -1,5 +1,4 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { AnnouncementService } from 'src/announcement/announcement.service';
 import { User } from '../../libs/models/src/user.model';
 import { InjectModel } from '@nestjs/sequelize';
 import { CreateUserDto } from './dto/user/create-user.dto';
@@ -40,11 +39,15 @@ export class UserService {
 	}
 
 	async create(data: CreateUserDto): Promise<User> {
+		console.log(data);
+		
 		const user = await this.userRepository.create(data);
-		const role = await this.roleService.getByName("USER")
-		await user.$set('roles', [role.id])
+  
+		const role = await this.roleService.getByName("USER");
+		await user.$set('roles', [role.id]);
+  
 		return user;
-	}
+  }
 
 	async update(id: number, updateUserDto: UpdateUserDto): Promise<User> {
 		const user = await this.getById(id);
@@ -56,9 +59,6 @@ export class UserService {
 		await user.destroy();
 	}
 
-	// public getAllAnnouncements(user_id: string) {
-	// 	return this.announcementService.getByOwnerId_MOCKS(user_id);
-	// }
 
 	async getDataForResume(user_id: number): Promise<ResumeUserDto> {
 		let user = (await this.getById(user_id))["dataValues"];
